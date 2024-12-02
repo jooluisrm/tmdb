@@ -1,9 +1,9 @@
-
+import { Welcome } from "@/components/home/welcome";
 
 const Page = () => {
     return (
         <div className="bg-black h-screen text-white">
-            HOME
+            <Welcome />
         </div>
     )
 }

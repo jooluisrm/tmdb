@@ -19,7 +19,7 @@ const Layout = ({ children }: Props) => {
     return (
         <html>
             <body className="">
-                <header className="bg-black absolute top-0 right-0 left-0">
+                <header className="bg-black fixed top-0 right-0 left-0 z-10">
                     <HeaderMenu />
                 </header>
                 <div className="mt-16">
