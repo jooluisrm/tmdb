@@ -12,19 +12,31 @@ export const Welcome = () => {
     const clickBanner = (value: string | null) => {
         switch (value) {
             case "1":
+                setNavImg1(true);
+                setNavImg2(false);
+                setNavImg3(false);
                 setImgBanner(`url(${img1.src})`);
                 break;
 
             case "2":
+                setNavImg1(false);
+                setNavImg2(true);
+                setNavImg3(false);
                 setImgBanner(`url(${img5.src})`);
                 break;
             case "3":
+                setNavImg1(false);
+                setNavImg2(false);
+                setNavImg3(true);
                 setImgBanner(`url(${img4.src})`);
                 break;
         }
     }
 
     const [imgBanner, setImgBanner] = useState(`url(${img1.src})`);
+    const [navImg1, setNavImg1] = useState(true);
+    const [navImg2, setNavImg2] = useState(false);
+    const [navImg3, setNavImg3] = useState(false);
 
 
     return (
@@ -35,7 +47,7 @@ export const Welcome = () => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
             }}
-            className="h-96 transition-all"
+            className="h-[400px] transition-all"
         >
             <div className="bg-black h-full opacity-80">
                 <div className="h-full flex flex-col justify-center">
@@ -46,10 +58,10 @@ export const Welcome = () => {
                         </h2>
                     </div>
 
-                    <div className="w-full flex justify-center gap-3 translate-y-24 transition-all">
-                        <ButtonBanner value="1" onClick={clickBanner}/>
-                        <ButtonBanner value="2" onClick={clickBanner}/>
-                        <ButtonBanner value="3" onClick={clickBanner}/>
+                    <div className="w-full flex justify-center gap-3 translate-y-28 transition-all">
+                        <ButtonBanner value="1" onClick={clickBanner} active={navImg1}/>
+                        <ButtonBanner value="2" onClick={clickBanner} active={navImg2}/>
+                        <ButtonBanner value="3" onClick={clickBanner} active={navImg3}/>
                     </div>
                 </div>
             </div>

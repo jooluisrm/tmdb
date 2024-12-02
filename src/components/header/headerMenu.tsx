@@ -44,7 +44,7 @@ export const HeaderMenu = () => {
 
     return (
         <div className="container mx-auto flex justify-between items-center h-16 text-gray-400">
-            <div className="text-2xl font-bold text-white">TMDBFLIX</div>
+            <div className="text-2xl font-bold text-white">TMDB<span className="text-red-700">FLIX</span></div>
             <div>
                 <nav className="flex gap-8">
                     <div className={`transition-all border-b-2 border-transparent ${navInicio && `border-white text-white`} hover:text-white`}>
