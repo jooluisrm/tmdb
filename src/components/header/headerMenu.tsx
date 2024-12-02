@@ -12,18 +12,27 @@ export const HeaderMenu = () => {
                 setNavInicio(false);
                 setNavFilmes(true);
                 setNavSeries(false);
+                setNavSearch(false);
                 break;
 
             case "series":
                 setNavInicio(false);
                 setNavFilmes(false);
                 setNavSeries(true);
+                setNavSearch(false);
                 break;
 
             case "inicio":
                 setNavInicio(true);
                 setNavFilmes(false);
                 setNavSeries(false);
+                setNavSearch(false);
+                break;
+            case "search":
+                setNavInicio(false);
+                setNavFilmes(false);
+                setNavSeries(false);
+                setNavSearch(true);
                 break;
         }
     }
@@ -31,6 +40,7 @@ export const HeaderMenu = () => {
     const [navInicio, setNavInicio] = useState(true);
     const [navFilmes, setNavFilmes] = useState(false);
     const [navSeries, setNavSeries] = useState(false);
+    const [navSearch, setNavSearch] = useState(false);
 
     return (
         <div className="container mx-auto flex justify-between items-center h-16 text-gray-400">
@@ -55,7 +65,11 @@ export const HeaderMenu = () => {
 
                 </nav>
             </div>
-            <div><Search /></div>
+            <div>
+                <Link href="/search" passHref legacyBehavior>
+                    <Search className={`transition-all cursor-pointer ${navSearch && `text-white`} hover:text-white`} values="search" onClick={(value) => clickLink(value.currentTarget.getAttribute('values'))} />
+                </Link>
+            </div>
         </div>
     );
 }
