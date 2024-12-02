@@ -5,9 +5,9 @@ type Props = {
     list: any;
 }
 
-export const Section = ({title, list}: Props) => {
+export const Section = ({ title, list }: Props) => {
     return (
-        <div>
+        <div className="mt-8">
             <div className="text-xl font-bold mb-3">
                 {title}
             </div>

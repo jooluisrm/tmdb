@@ -18,5 +18,15 @@ export const movieTrending = async () => {
     }
 }
 
+export const seriesTrending = async () => {
+    try {
+        const response = await api.get("/trending/tv/day?language=pt-br");
+        console.log("Series:", response.data.results);
+        return response.data.results;
+    } catch (error) {
+        console.log("Error ao buscar serie:", error)
+    }
+}
+
 export default api;
 
