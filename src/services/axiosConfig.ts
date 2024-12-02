@@ -28,5 +28,15 @@ export const seriesTrending = async () => {
     }
 }
 
+export const peopleTrending = async () => {
+    try {
+        const response = await api.get("/trending/person/day?language=pt-BRr");
+        console.log("Person:", response.data.results);
+        return response.data.results;
+    } catch (error) {
+        console.log("Error ao buscar person:", error)
+    }
+}
+
 export default api;
 

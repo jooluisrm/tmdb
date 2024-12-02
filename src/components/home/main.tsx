@@ -1,5 +1,5 @@
 "use client"
-import api, { movieTrending, seriesTrending } from "@/services/axiosConfig";
+import api, { movieTrending, peopleTrending, seriesTrending } from "@/services/axiosConfig";
 import { Movie } from "@/types/movieType";
 import { useEffect, useState } from "react";
 import { Item } from "./item";
@@ -9,6 +9,7 @@ export const Main = () => {
 
     const [filmesAlta, setFilmesAlta] = useState([]);
     const [seriesAlta, setSeriesAlta] = useState([]);
+    const [personAlta, setPersonAlta] = useState([]);
 
     useEffect(() => {
         const carregarFilmesEmAlta = async () => {
@@ -24,8 +25,17 @@ export const Main = () => {
                 setSeriesAlta(series);
             }
         }
+
+        const carregarPersonEmAlta = async () => {
+            const person = await peopleTrending();
+            if(person) {
+                setPersonAlta(person);
+            }
+        }
+
         carregarFilmesEmAlta();
         carregarSeriesEmAlta();
+        carregarPersonEmAlta();
 
     }, []);
     return (
@@ -33,6 +43,7 @@ export const Main = () => {
             <section className="container mx-auto">
                 <Section title="Filmes em Alta" list={filmesAlta} />
                 <Section title="Séries em Alta" list={seriesAlta}/>
+                <Section title="Atores & Atrizs Famosos(a)" list={personAlta}/>
             </section>
         </main>
     );
