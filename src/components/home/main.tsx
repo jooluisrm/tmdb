@@ -1,22 +1,29 @@
 "use client"
 import api, { movieTrending } from "@/services/axiosConfig";
-import { useEffect } from "react";
+import { Movie } from "@/types/movieType";
+import { useEffect, useState } from "react";
+import { Item } from "./item";
+import { Section } from "./section";
 
 export const Main = () => {
-    
+
+    const [filmesAlta, setFilmesAlta] = useState([]);
 
     useEffect(() => {
-        movieTrending();
+        const carregarFilmesEmAlta = async () => {
+            const movies = await movieTrending();
+            if (movies) {
+                setFilmesAlta(movies);
+            }
+        }
+        carregarFilmesEmAlta();
+
     }, []);
     return (
-        <main>
+        <main className="mt-5">
             <section className="container mx-auto">
-                <div>
-                    Filmes em alta
-                </div>
-                <div>
+                <Section title="Filmes em Alta" list={filmesAlta}/>
 
-                </div>
             </section>
         </main>
     );

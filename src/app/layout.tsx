@@ -18,7 +18,7 @@ type Props = {
 const Layout = ({ children }: Props) => {
     return (
         <html>
-            <body className="">
+            <body className="overflow-x-hidden">
                 <header className="bg-black bg-opacity-50 fixed top-0 right-0 left-0 z-10">
                     <HeaderMenu />
                 </header>

@@ -3,7 +3,7 @@ import { Welcome } from "@/components/home/welcome";
 
 const Page = () => {
     return (
-        <div className="bg-black h-screen text-white">
+        <div className="bg-black min-h-screen text-white">
             <Welcome />
             <Main />
         </div>
