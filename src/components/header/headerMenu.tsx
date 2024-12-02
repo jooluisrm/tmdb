@@ -59,7 +59,7 @@ export const HeaderMenu = () => {
                     </div>
                     <div className={`transition-all border-b-2 border-transparent ${navSeries && `border-white text-white`} hover:text-white`}>
                         <Link href="/series" passHref legacyBehavior>
-                            <li value="series" className={`list-none text-xl cursor-pointer`} onClick={(value) => clickLink(value.currentTarget.getAttribute('value'))}>Series</li>
+                            <li value="series" className={`list-none text-xl cursor-pointer`} onClick={(value) => clickLink(value.currentTarget.getAttribute('value'))}>Séries</li>
                         </Link>
                     </div>
 

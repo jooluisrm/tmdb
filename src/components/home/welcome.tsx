@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import img1 from "../../../public/img/clube-da-luta.png";
-import img2 from "../../../public/img/homemaranha001.jpg";
-import img3 from "../../../public/img/joker-coringa-poster-imax_trecobox.jpg";
-import { Carousel } from "../ui/carousel";
+import img4 from "../../../public/img/arcane2.jpg";
+import img5 from "../../../public/img/braking.jpg";
 import { useState } from "react";
 import { ButtonBanner } from "./buttonBanner";
 
@@ -17,10 +16,10 @@ export const Welcome = () => {
                 break;
 
             case "2":
-                setImgBanner(`url(${img2.src})`);
+                setImgBanner(`url(${img5.src})`);
                 break;
             case "3":
-                setImgBanner(`url(${img3.src})`);
+                setImgBanner(`url(${img4.src})`);
                 break;
         }
     }
@@ -36,7 +35,7 @@ export const Welcome = () => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
             }}
-            className="h-80 transition-all"
+            className="h-96 transition-all"
         >
             <div className="bg-black h-full opacity-80">
                 <div className="h-full flex flex-col justify-center">
