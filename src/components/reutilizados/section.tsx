@@ -1,7 +1,7 @@
 import { MediaItem } from "@/types/movieType";
+import { useRef, useState } from "react";
 import { Item } from "./item";
 import { ArrowSection } from "./arrowSection";
-import { useRef, useState } from "react";
 
 type Props = {
     title: string;
@@ -50,7 +50,7 @@ export const Section = ({ title, list }: Props) => {
 
             {/* Conteúdo dos Itens */}
             <div
-                className="relative overflow-hidden smooth-scroll" // Adicionando a classe para transição suave
+                className="relative overflow-hidden smooth-scroll mx-auto w-[1250px] 2xl:w-full" // Adicionando a classe para transição suave
                 ref={carrouselRef}
             >
                 <Item data={list} />
