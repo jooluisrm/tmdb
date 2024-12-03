@@ -43,7 +43,7 @@ export const Main = () => {
             <section className="container mx-auto">
                 <Section title="Filmes em Alta" list={filmesAlta} />
                 <Section title="Séries em Alta" list={seriesAlta}/>
-                <Section title="Atores & Atrizs Famosos(a)" list={personAlta}/>
+                <Section title="Atores & Atrizes Famosos(a)" list={personAlta}/>
             </section>
         </main>
     );
