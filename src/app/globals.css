@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Adiciona transições suaves ao carrossel */
+.smooth-scroll {
+  scroll-behavior: smooth; /* Suaviza o movimento do scroll */
+  transition: transform 0.3s ease-in-out; /* Suaviza a transição de movimento */
+}
+
+/* Estilos das setas */
+.arrow-section {
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+.arrow-section:hover {
+  background-color: rgba(0, 0, 0, 0.6); /* Aumenta a opacidade das setas */
+}
+
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }

@@ -6,6 +6,7 @@ import img4 from "../../../public/img/arcane2.jpg";
 import img5 from "../../../public/img/braking.jpg";
 import { useState } from "react";
 import { ButtonBanner } from "./buttonBanner";
+import {motion} from "framer-motion";
 
 export const Welcome = () => {
 
