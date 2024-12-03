@@ -47,8 +47,8 @@ export const Welcome = ({ type }: Props) => {
         <section
             style={{
                 backgroundImage: `
-            linear-gradient(to right, black 0%, transparent), 
-            linear-gradient(to top, black 0%, transparent),
+            linear-gradient(to right, black , transparent), 
+            linear-gradient(to top, black , transparent),
             ${imgBanner}
         `,
                 backgroundSize: "cover",

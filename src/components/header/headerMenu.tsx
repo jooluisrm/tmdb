@@ -44,7 +44,17 @@ export const HeaderMenu = () => {
 
     return (
         <div className="container mx-auto flex justify-between items-center h-16 text-gray-400">
-            <div className="text-2xl font-bold text-white">TMDB<span className="text-red-700">FLIX</span></div>
+            <Link href="/">
+                <li
+                    value="inicio"
+                    className="list-none text-2xl font-bold text-gray-400 cursor-pointer transition-all hover:text-white group"
+                    onClick={(value) => clickLink(value.currentTarget.getAttribute('value'))}
+                >
+                    TMDB
+                    <span className="text-red-900 transition-all group-hover:text-red-600">FLIX</span>
+                </li>
+            </Link>
+
             <div>
                 <nav className="flex gap-8">
                     <div className={`transition-all border-b-2 border-transparent ${navInicio && `border-white text-white`} hover:text-white`}>
@@ -62,7 +72,6 @@ export const HeaderMenu = () => {
                             <li value="series" className={`list-none text-xl cursor-pointer`} onClick={(value) => clickLink(value.currentTarget.getAttribute('value'))}>Séries</li>
                         </Link>
                     </div>
-
                 </nav>
             </div>
             <div>
