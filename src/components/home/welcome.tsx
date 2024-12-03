@@ -6,9 +6,12 @@ import img4 from "../../../public/img/arcane2.jpg";
 import img5 from "../../../public/img/braking.jpg";
 import { useState } from "react";
 import { ButtonBanner } from "./buttonBanner";
-import {motion} from "framer-motion";
 
-export const Welcome = () => {
+type Props = {
+    type: "filmes" | "inicio" | "series";
+}
+
+export const Welcome = ({ type }: Props) => {
 
     const clickBanner = (value: string | null) => {
         switch (value) {
@@ -43,26 +46,36 @@ export const Welcome = () => {
     return (
         <section
             style={{
-                backgroundImage: imgBanner,
+                backgroundImage: `
+            linear-gradient(to right, black 0%, transparent), 
+            linear-gradient(to top, black 0%, transparent),
+            ${imgBanner}
+        `,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
             }}
             className="h-[400px] transition-all"
         >
-            <div className="bg-black h-full opacity-80">
+            <div className="bg-black h-full bg-opacity-0">
                 <div className="h-full flex flex-col justify-center">
                     <div className="container mx-auto">
-                        <h1 className="text-4xl font-bold">Bem-vindo(a).</h1>
-                        <h2 className="text-2xl">
-                            Milhões de filmes, séries e pessoas para descobrires. Explora já.
-                        </h2>
+                        <div className="text-4xl font-bold">
+                            {type === "inicio" && <h1>Bem-vindo(a).</h1>}
+                            {type === "filmes" && <h1>Filmes</h1>}
+                            {type === "series" && <h1>Séries</h1>}
+                        </div>
+                        <div className="text-2xl">
+                            {type === "inicio" && <h2>Milhões de filmes, séries e pessoas para descobrires. Explora já.</h2>}
+                            {type === "filmes" && <h2>Milhões de filmes incríveis para descobrir. Mergulha nas histórias agora.</h2>}
+                            {type === "series" && <h2>Milhares de séries emocionantes para explorar. Comece a maratonar agora.</h2>}
+                        </div>
                     </div>
 
                     <div className="w-full flex justify-center gap-3 translate-y-28 transition-all">
-                        <ButtonBanner value="1" onClick={clickBanner} active={navImg1}/>
-                        <ButtonBanner value="2" onClick={clickBanner} active={navImg2}/>
-                        <ButtonBanner value="3" onClick={clickBanner} active={navImg3}/>
+                        <ButtonBanner value="1" onClick={clickBanner} active={navImg1} />
+                        <ButtonBanner value="2" onClick={clickBanner} active={navImg2} />
+                        <ButtonBanner value="3" onClick={clickBanner} active={navImg3} />
                     </div>
                 </div>
             </div>

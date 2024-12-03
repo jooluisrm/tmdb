@@ -11,7 +11,7 @@ const api = axios.create({
 export const movieTrending = async () => {
     try {
         const response = await api.get("/trending/movie/day?language=pt-BR");
-        console.log("Filmes:", response.data.results);
+        
         return response.data.results;
     } catch (error) {
         console.error("Erro ao buscar filmes:", error);
@@ -21,7 +21,7 @@ export const movieTrending = async () => {
 export const seriesTrending = async () => {
     try {
         const response = await api.get("/trending/tv/day?language=pt-BR");
-        console.log("Series:", response.data.results);
+        
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar serie:", error)
@@ -31,7 +31,7 @@ export const seriesTrending = async () => {
 export const allTrending = async () => {
     try {
         const response = await api.get("/trending/all/day?language=pt-BR");
-        console.log("All:", response.data.results);
+        
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar all:", error)
@@ -41,10 +41,23 @@ export const allTrending = async () => {
 export const peopleTrending = async () => {
     try {
         const response = await api.get("/trending/person/day?language=pt-BR");
-        console.log("Person:", response.data.results);
+        
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar person:", error)
+    }
+}
+
+// carregar banner do filme
+
+export const bannerFilme = async (id: number) => {
+    try {
+        const response = await api.get(`https://api.themoviedb.org/3/movie/${id}/images`);
+        console.log(response.data.posters[0].file_path);
+        return response.data.backdrops[0].file_path;
+        
+    } catch (error) {
+        console.log("Error ao buscar banner:", error)
     }
 }
 

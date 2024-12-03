@@ -1,3 +1,4 @@
+import { Welcome } from "@/components/home/welcome";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,8 +7,8 @@ export const metadata: Metadata = {
 
 const Filmes = () => {
     return (
-        <div>
-            FILMES
+        <div className="bg-black min-h-screen text-white">
+            <Welcome type="filmes"/>
         </div>
     )
 }

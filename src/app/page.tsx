@@ -4,7 +4,7 @@ import { Welcome } from "@/components/home/welcome";
 const Page = () => {
     return (
         <div className="bg-black min-h-screen text-white">
-            <Welcome />
+            <Welcome type="inicio"/>
             <Main />
         </div>
     )
