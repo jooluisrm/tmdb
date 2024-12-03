@@ -12,7 +12,7 @@ type Props = {
 export const Section = ({ title, list }: Props) => {
     const [isHoverd, setIsHoverd]= useState(false);
 
-    const mouseEnter = (hover: boolean) => {
+    const hover = (hover: boolean) => {
         if(hover) {
             return setIsHoverd(true);
         }
@@ -20,7 +20,7 @@ export const Section = ({ title, list }: Props) => {
     }
 
     return (
-        <div className="relative mt-10" onMouseEnter={() => mouseEnter(true)} onMouseLeave={() => mouseEnter(false)}>
+        <div className="relative mt-10" onMouseEnter={() => hover(true)} onMouseLeave={() => hover(false)}>
             {/* Título da Seção */}
             <div className="text-xl font-bold mb-3 container mx-auto">
                 {title}
