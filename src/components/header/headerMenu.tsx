@@ -3,39 +3,17 @@
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { LiNav } from "./liNav";
 
 export const HeaderMenu = () => {
 
     const clickLink = (value: string | null) => {
-        switch (value) {
-            case "filmes":
-                setNavInicio(false);
-                setNavFilmes(true);
-                setNavSeries(false);
-                setNavSearch(false);
-                break;
-
-            case "series":
-                setNavInicio(false);
-                setNavFilmes(false);
-                setNavSeries(true);
-                setNavSearch(false);
-                break;
-
-            case "inicio":
-                setNavInicio(true);
-                setNavFilmes(false);
-                setNavSeries(false);
-                setNavSearch(false);
-                break;
-            case "search":
-                setNavInicio(false);
-                setNavFilmes(false);
-                setNavSeries(false);
-                setNavSearch(true);
-                break;
+        if (value) {
+            setActiveSection(value);
         }
-    }
+    };
+    
+    const [activeSection, setActiveSection] = useState<string>("inicio");
 
     const [navInicio, setNavInicio] = useState(true);
     const [navFilmes, setNavFilmes] = useState(false);
@@ -57,26 +35,14 @@ export const HeaderMenu = () => {
 
             <div>
                 <nav className="flex gap-8">
-                    <div className={`transition-all border-b-2 border-transparent ${navInicio && `border-white text-white`} hover:text-white`}>
-                        <Link href="/" passHref legacyBehavior>
-                            <li value="inicio" className={`list-none text-xl cursor-pointer`} onClick={(value) => clickLink(value.currentTarget.getAttribute('value'))}>Início</li>
-                        </Link>
-                    </div>
-                    <div className={`transition-all border-b-2 border-transparent ${navFilmes && `border-white text-white`} hover:text-white`}>
-                        <Link href="/filmes" passHref legacyBehavior>
-                            <li value="filmes" className={`list-none text-xl cursor-pointer`} onClick={(value) => clickLink(value.currentTarget.getAttribute('value'))}>Filmes</li>
-                        </Link>
-                    </div>
-                    <div className={`transition-all border-b-2 border-transparent ${navSeries && `border-white text-white`} hover:text-white`}>
-                        <Link href="/series" passHref legacyBehavior>
-                            <li value="series" className={`list-none text-xl cursor-pointer`} onClick={(value) => clickLink(value.currentTarget.getAttribute('value'))}>Séries</li>
-                        </Link>
-                    </div>
+                    <LiNav href="/" navState={activeSection} onClick={clickLink} title="Início" value="inicio"/>
+                    <LiNav href="/filmes" navState={activeSection} onClick={clickLink} title="Filmes" value="filmes"/>
+                    <LiNav href="/series" navState={activeSection} onClick={clickLink} title="Séries" value="series"/>
                 </nav>
             </div>
             <div>
                 <Link href="/search" passHref legacyBehavior>
-                    <Search className={`transition-all cursor-pointer ${navSearch && `text-white`} hover:text-white`} values="search" onClick={(value) => clickLink(value.currentTarget.getAttribute('values'))} />
+                    <Search className={`transition-all cursor-pointer ${activeSection === 'search' && `text-white`} hover:text-white`} values="search" onClick={(value) => clickLink(value.currentTarget.getAttribute('values'))} />
                 </Link>
             </div>
         </div>
