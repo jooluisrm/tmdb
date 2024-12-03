@@ -1,4 +1,4 @@
-import { Welcome } from "@/components/home/welcome";
+import { Welcome } from "@/components/reutilizados/welcome";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

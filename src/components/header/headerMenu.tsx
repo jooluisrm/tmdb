@@ -7,18 +7,13 @@ import { LiNav } from "./liNav";
 
 export const HeaderMenu = () => {
 
+    const [activeSection, setActiveSection] = useState<string>("inicio");
+
     const clickLink = (value: string | null) => {
         if (value) {
             setActiveSection(value);
         }
     };
-    
-    const [activeSection, setActiveSection] = useState<string>("inicio");
-
-    const [navInicio, setNavInicio] = useState(true);
-    const [navFilmes, setNavFilmes] = useState(false);
-    const [navSeries, setNavSeries] = useState(false);
-    const [navSearch, setNavSearch] = useState(false);
 
     return (
         <div className="container mx-auto flex justify-between items-center h-16 text-gray-400">

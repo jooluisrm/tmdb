@@ -2,8 +2,8 @@
 import api, { allTrending, movieTrending, peopleTrending, seriesTrending } from "@/services/axiosConfig";
 import { Movie } from "@/types/movieType";
 import { useEffect, useState } from "react";
-import { Item } from "./item";
-import { Section } from "./section";
+import { Item } from "../reutilizados/item";
+import { Section } from "../reutilizados/section";
 
 export const Main = () => {
 

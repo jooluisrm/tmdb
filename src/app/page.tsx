@@ -1,5 +1,5 @@
 import { Main } from "@/components/home/main";
-import { Welcome } from "@/components/home/welcome";
+import { Welcome } from "@/components/reutilizados/welcome";
 
 const Page = () => {
     return (
