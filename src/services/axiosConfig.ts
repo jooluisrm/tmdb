@@ -20,7 +20,7 @@ export const movieTrending = async () => {
 
 export const seriesTrending = async () => {
     try {
-        const response = await api.get("/trending/tv/day?language=pt-br");
+        const response = await api.get("/trending/tv/day?language=pt-BR");
         console.log("Series:", response.data.results);
         return response.data.results;
     } catch (error) {
@@ -28,9 +28,19 @@ export const seriesTrending = async () => {
     }
 }
 
+export const allTrending = async () => {
+    try {
+        const response = await api.get("/trending/all/day?language=pt-BR");
+        console.log("All:", response.data.results);
+        return response.data.results;
+    } catch (error) {
+        console.log("Error ao buscar all:", error)
+    }
+}
+
 export const peopleTrending = async () => {
     try {
-        const response = await api.get("/trending/person/day?language=pt-BRr");
+        const response = await api.get("/trending/person/day?language=pt-BR");
         console.log("Person:", response.data.results);
         return response.data.results;
     } catch (error) {
