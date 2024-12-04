@@ -7,11 +7,14 @@ import { Section } from "../reutilizados/section";
 
 export const MainMovie = () => {
 
+    // Lista filmes
     const [filmesAlta, setFilmesAlta] = useState([])
     const [filmesNovos, setFilmesNovos] = useState([]);
     
-    const [pageNews, setPageNews] = useState(1);
+    // Lista page filmes
     const [pageAlta, setPageAlta] = useState(1);// nao funciona
+    const [pageNews, setPageNews] = useState(1);
+    
 
     useEffect(() => {
         const carregarFilmesEmAlta = async () => {

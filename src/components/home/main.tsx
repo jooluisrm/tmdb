@@ -12,6 +12,11 @@ export const Main = () => {
     const [personAlta, setPersonAlta] = useState([]);
     const [allAlta, setAllAlta] = useState([]);
 
+    const [pageFilmesAlta, setPageFilmesAlta] = useState(1);// nao funciona
+    const [pageSeriesAlta, setPageSeriesAlta] = useState(1);// nao funciona
+    const [pagePersonAlta, setPagePersonAlta] = useState(1);// nao funciona
+    const [pageAllAlta, setPageAllAlta] = useState(1);// nao funciona
+
     useEffect(() => {
         const carregarFilmesEmAlta = async () => {
             const movies = await movieTrending();
@@ -50,10 +55,10 @@ export const Main = () => {
     return (
         <main className="mt-5">
             <section className="">
-                <Section title="Filmes & Séries em Alta" list={allAlta}/>
-                <Section title="Filmes em Alta" list={filmesAlta} />
-                <Section title="Séries em Alta" list={seriesAlta}/>
-                <Section title="Atores & Atrizes Famosos(a)" list={personAlta}/>
+                <Section title="Filmes & Séries em Alta" list={allAlta} pageList={pageAllAlta} setPageList={setPageAllAlta}/>
+                <Section title="Filmes em Alta" list={filmesAlta} pageList={pageFilmesAlta} setPageList={setPageFilmesAlta}/>
+                <Section title="Séries em Alta" list={seriesAlta} pageList={pageSeriesAlta} setPageList={setPageSeriesAlta}/>
+                <Section title="Atores & Atrizes Famosos(a)" list={personAlta} pageList={pagePersonAlta} setPageList={setPagePersonAlta}/>
             </section>
         </main>
     );
