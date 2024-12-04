@@ -1,4 +1,4 @@
-import { MediaItem } from "@/types/movieType";
+import { MediaItem, MediaItemWithoutType } from "@/types/movieType";
 
 type Props = {
     data: MediaItem[];
@@ -29,6 +29,13 @@ export const Item = ({ data }: Props) => {
                             <img
                                 src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`}
                                 alt={item.original_name}
+                                className="h-full min-w-52 object-cover"
+                            />
+                        )}
+                        {!item.media_type && (
+                            <img
+                                src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+                                alt={item.original_title}
                                 className="h-full min-w-52 object-cover"
                             />
                         )}

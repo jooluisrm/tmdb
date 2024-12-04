@@ -10,7 +10,7 @@ const api = axios.create({
 
 export const movieTrending = async () => {
     try {
-        const response = await api.get("/trending/movie/day?language=pt-BR");
+        const response = await api.get(`/trending/movie/day?language=pt-BR`);
         
         return response.data.results;
     } catch (error) {
@@ -45,6 +45,18 @@ export const peopleTrending = async () => {
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar person:", error)
+    }
+}
+
+// Page Filmes
+
+export const movieNews = async (page: number) => {
+    try {
+        const response = await api.get(`movie/now_playing?language=pt-BR&page=${page}`);
+        console.log(response.data.results)
+        return response.data.results;
+    } catch (error) {
+        console.log("Error ao buscar filmes novos:", error)
     }
 }
 

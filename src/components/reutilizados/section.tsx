@@ -6,9 +6,11 @@ import { ArrowSection } from "./arrowSection";
 type Props = {
     title: string;
     list: MediaItem[];
+    pageList: number;
+    setPageList: (n: number) => void;
 }
 
-export const Section = ({ title, list }: Props) => {
+export const Section = ({ title, list, pageList, setPageList }: Props) => {
     const [isHovered, setIsHovered] = useState(false);
     const carrouselRef = useRef<HTMLDivElement | null>(null);
 
@@ -22,10 +24,15 @@ export const Section = ({ title, list }: Props) => {
         if (carrouselRef.current) {
             const scrollAmount = 1140; // Ajuste a largura do item conforme necessário
             const maxScroll = carrouselRef.current.scrollWidth - carrouselRef.current.offsetWidth;
-            
+
             if (direction === "left") {
                 if (carrouselRef.current.scrollLeft <= 0) {
                     // Se estiver no início, vai para o final
+
+                    if (pageList > 1) { // mudando a pagina -
+                        setPageList(pageList - 1);
+                    }
+
                     carrouselRef.current.scrollLeft = maxScroll;
                 } else {
                     carrouselRef.current.scrollLeft -= scrollAmount;
@@ -33,7 +40,10 @@ export const Section = ({ title, list }: Props) => {
             } else {
                 if (carrouselRef.current.scrollLeft >= maxScroll) {
                     // Se estiver no final, vai para o início
-                    carrouselRef.current.scrollLeft = 0;
+
+                    setPageList(pageList + 1); // mudando a pagina +
+
+                    carrouselRef.current.scrollLeft = 0
                 } else {
                     carrouselRef.current.scrollLeft += scrollAmount;
                 }
