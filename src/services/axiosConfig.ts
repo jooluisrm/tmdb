@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "https://api.themoviedb.org/3/",
+    baseURL: "https://api.themoviedb.org/3",
     headers: {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NTA5M2IzYmU2ZjQ2NzQxYjE4ODcwYWI5NjY5YjI2MCIsIm5iZiI6MTczMjg4OTM1MS4yNzQsInN1YiI6IjY3NDljYjA3ZjQ1OGZlYTE2MTI4ZDlhNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CzJebHL9DPoW1FJGg7QbtsfNdPEyRsGGU23jExD8F-8",
         "Content-Type": "application/json"
@@ -50,15 +50,25 @@ export const peopleTrending = async () => {
 
 // Page Filmes
 
-export const movieNews = async (page: number) => {
+export const movieNews = async (pageId: number) => {
     try {
-        const response = await api.get(`movie/now_playing?language=pt-BR&page=${page}`);
-        console.log(response.data.results)
+        const response = await api.get(`/movie/now_playing?language=pt-BR&page=${pageId}`);
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar filmes novos:", error)
     }
 }
+
+export const moviePopular = async (pageId: number) => {
+    try {
+        const response = await api.get(`/movie/popular?language=pt-BR&page=${pageId}`);
+        console.log(response.data.results, pageId)
+        return response.data.results;
+    } catch (error) {
+        console.log("Error ao buscar filmes popular:", error)
+    }
+}
+
 
 // carregar banner do filme
 

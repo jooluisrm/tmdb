@@ -1,5 +1,5 @@
 "use client"
-import api, { allTrending, movieNews, movieTrending, peopleTrending, seriesTrending } from "@/services/axiosConfig";
+import api, { allTrending, movieNews, moviePopular, movieTrending, peopleTrending, seriesTrending } from "@/services/axiosConfig";
 import { Movie } from "@/types/movieType";
 import { useEffect, useState } from "react";
 import { Item } from "../reutilizados/item";
@@ -10,10 +10,12 @@ export const MainMovie = () => {
     // Lista filmes
     const [filmesAlta, setFilmesAlta] = useState([])
     const [filmesNovos, setFilmesNovos] = useState([]);
+    const [filmesPolular, setFilmesPolular] = useState([]);
     
     // Lista page filmes
-    const [pageAlta, setPageAlta] = useState(1);// nao funciona
+    const [pageAlta, setPageAlta] = useState(1); // nao funciona
     const [pageNews, setPageNews] = useState(1);
+    const [pagePopular, setPagePopular] = useState(1);
     
 
     useEffect(() => {
@@ -29,17 +31,25 @@ export const MainMovie = () => {
                 setFilmesNovos(movies);
             }
         }
+        const carregarFilmesPolular = async () => {
+            const movies = await moviePopular(pagePopular);
+            if(movies) {
+                setFilmesPolular(movies);
+            }
+        }
 
         carregarFilmesEmAlta();
         carregarFilmesNovos();
+        carregarFilmesPolular();
 
-    }, [pageNews]);
+    }, [pageNews, pagePopular]);
 
     return (
         <main className="mt-5">
             <section className="">
                 <Section title="Novos" list={filmesNovos} pageList={pageNews} setPageList={setPageNews}/>
-                <Section title="Filmes em Alta" list={filmesAlta} pageList={pageAlta} setPageList={setPageAlta}/>
+                <Section title="Em Alta" list={filmesAlta} pageList={pageAlta} setPageList={setPageAlta}/>
+                <Section title="Populares" list={filmesPolular} pageList={pagePopular} setPageList={setPagePopular}/>
             </section>
         </main>
     );

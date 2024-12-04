@@ -40,7 +40,6 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
             } else {
                 if (carrouselRef.current.scrollLeft >= maxScroll) {
                     // Se estiver no final, vai para o início
-
                     setPageList(pageList + 1); // mudando a pagina +
 
                     carrouselRef.current.scrollLeft = 0
