@@ -55,7 +55,7 @@ export const movieNews = async (pageId: number) => {
         const response = await api.get(`/movie/now_playing?language=pt-BR&page=${pageId}`);
         return response.data.results;
     } catch (error) {
-        console.log("Error ao buscar filmes novos:", error)
+        console.log("Error ao buscar filmes novos:", error);
     }
 }
 
@@ -65,7 +65,27 @@ export const moviePopular = async (pageId: number) => {
         console.log(response.data.results, pageId)
         return response.data.results;
     } catch (error) {
-        console.log("Error ao buscar filmes popular:", error)
+        console.log("Error ao buscar filmes popular:", error);
+    }
+}
+
+export const movieClasificacao = async (pageId: number) => {
+    try {
+        const response = await api.get(`/movie/top_rated?language=pt-BR&page=${pageId}`);
+        console.log(response.data.results, pageId)
+        return response.data.results;
+    } catch (error) {
+        console.log("Error ao buscar filmes clasificados:", error);
+    }
+}
+
+export const movieEmBreve = async (pageId: number) => {
+    try {
+        const response = await api.get(`/movie/upcoming?language=pt-BR&page=${pageId}`);
+        console.log(response.data.results, pageId)
+        return response.data.results;
+    } catch (error) {
+        console.log("Error ao buscar filmes em breve:", error);
     }
 }
 
