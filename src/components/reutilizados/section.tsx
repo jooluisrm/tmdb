@@ -51,7 +51,7 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
     };
 
     return (
-        <div className="relative mt-10" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+        <div className="relative mt-10 container mx-auto" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
             {/* Título da Seção */}
             <div className="text-xl font-bold mb-3 container mx-auto">
                 {title}
@@ -59,7 +59,7 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
 
             {/* Conteúdo dos Itens */}
             <div
-                className="relative overflow-hidden smooth-scroll mx-auto w-[1250px] 2xl:w-full" // Adicionando a classe para transição suave
+                className="relative overflow-hidden smooth-scroll mx-auto" // Adicionando a classe para transição suave
                 ref={carrouselRef}
             >
                 <Item data={list} />
