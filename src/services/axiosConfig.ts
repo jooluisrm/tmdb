@@ -11,7 +11,7 @@ const api = axios.create({
 export const movieTrending = async () => {
     try {
         const response = await api.get(`/trending/movie/day?language=pt-BR`);
-        
+
         return response.data.results;
     } catch (error) {
         console.error("Erro ao buscar filmes:", error);
@@ -21,7 +21,7 @@ export const movieTrending = async () => {
 export const seriesTrending = async () => {
     try {
         const response = await api.get("/trending/tv/day?language=pt-BR");
-        
+
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar serie:", error)
@@ -31,7 +31,7 @@ export const seriesTrending = async () => {
 export const allTrending = async () => {
     try {
         const response = await api.get("/trending/all/day?language=pt-BR");
-        
+
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar all:", error)
@@ -41,7 +41,7 @@ export const allTrending = async () => {
 export const peopleTrending = async () => {
     try {
         const response = await api.get("/trending/person/day?language=pt-BR");
-        
+
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar person:", error)
@@ -50,42 +50,23 @@ export const peopleTrending = async () => {
 
 // Page Filmes
 
-export const movieNews = async (pageId: number) => {
-    try {
-        const response = await api.get(`/movie/now_playing?language=pt-BR&page=${pageId}`);
-        return response.data.results;
-    } catch (error) {
-        console.log("Error ao buscar filmes novos:", error);
+export type Categoria =
+    | {
+        type: "movie";
+        category: "now_playing" | "popular" | "top_rated" | "upcoming";
     }
-}
+    | {
+        type: "tv";
+        category: "airing_today" | "on_the_air" | "popular" | "top_rated";
+    };
 
-export const moviePopular = async (pageId: number) => {
+export const movieOrTv = async (pageId: number, params: Categoria) => {
+    const { type, category } = params;
     try {
-        const response = await api.get(`/movie/popular?language=pt-BR&page=${pageId}`);
-        console.log(response.data.results, pageId)
+        const response = await api.get(`/${type}/${category}?language=pt-BR&page=${pageId}`);
         return response.data.results;
     } catch (error) {
-        console.log("Error ao buscar filmes popular:", error);
-    }
-}
-
-export const movieClasificacao = async (pageId: number) => {
-    try {
-        const response = await api.get(`/movie/top_rated?language=pt-BR&page=${pageId}`);
-        console.log(response.data.results, pageId)
-        return response.data.results;
-    } catch (error) {
-        console.log("Error ao buscar filmes clasificados:", error);
-    }
-}
-
-export const movieEmBreve = async (pageId: number) => {
-    try {
-        const response = await api.get(`/movie/upcoming?language=pt-BR&page=${pageId}`);
-        console.log(response.data.results, pageId)
-        return response.data.results;
-    } catch (error) {
-        console.log("Error ao buscar filmes em breve:", error);
+        console.log(`Erro ao buscar ${type} ${category}`, error);
     }
 }
 
@@ -97,7 +78,7 @@ export const bannerFilme = async (id: number) => {
         const response = await api.get(`https://api.themoviedb.org/3/movie/${id}/images`);
         console.log(response.data.posters[0].file_path);
         return response.data.backdrops[0].file_path;
-        
+
     } catch (error) {
         console.log("Error ao buscar banner:", error)
     }

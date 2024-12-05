@@ -1,3 +1,5 @@
+import { Welcome } from "@/components/reutilizados/welcome";
+import { MainSeries } from "@/components/series/mainSeries";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,8 +8,9 @@ export const metadata: Metadata = {
 
 const Series = () => {
     return (
-        <div>
-            SÉRIES
+        <div className="bg-black min-h-screen text-white">
+            <Welcome type="series"/>
+            <MainSeries />
         </div>
     )
 }

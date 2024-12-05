@@ -1,5 +1,5 @@
 "use client"
-import api, { allTrending, movieClasificacao, movieEmBreve, movieNews, moviePopular, movieTrending, peopleTrending, seriesTrending } from "@/services/axiosConfig";
+import api, { allTrending, Categoria, movieOrTv, movieTrending, peopleTrending, seriesTrending } from "@/services/axiosConfig";
 import { Movie } from "@/types/movieType";
 import { useEffect, useState } from "react";
 import { Item } from "../reutilizados/item";
@@ -13,14 +13,13 @@ export const MainMovie = () => {
     const [filmesPolular, setFilmesPolular] = useState([]);
     const [filmesClasificados, setFilmesClasificados] = useState([]);
     const [filmesEmBreve, setFilmesEmBreve] = useState([]);
-    
+
     // Lista page filmes
     const [pageAlta, setPageAlta] = useState(1); // nao funciona
     const [pageNews, setPageNews] = useState(1);
     const [pagePopular, setPagePopular] = useState(1);
     const [pageClasificados, setPageClasificados] = useState(1);
     const [pageEmBreve, setPageEmBreve] = useState(1);
-    
 
     useEffect(() => {
         const carregarFilmesEmAlta = async () => {
@@ -30,26 +29,26 @@ export const MainMovie = () => {
             }
         }
         const carregarFilmesNovos = async () => {
-            const movies = await movieNews(pageNews);
-            if(movies) {
+            const movies = await movieOrTv(pageNews, { type: "movie", category: "now_playing" });
+            if (movies) {
                 setFilmesNovos(movies);
             }
         }
         const carregarFilmesPolular = async () => {
-            const movies = await moviePopular(pagePopular);
-            if(movies) {
+            const movies = await movieOrTv(pagePopular, { type: "movie", category: "popular" });
+            if (movies) {
                 setFilmesPolular(movies);
             }
         }
         const carregarFilmesClasificados = async () => {
-            const movie = await movieClasificacao(pageClasificados);
-            if(movie) {
+            const movie = await movieOrTv(pageClasificados, { type: "movie", category: "top_rated" });
+            if (movie) {
                 setFilmesClasificados(movie);
             }
         }
         const carregarFilmesEmBreve = async () => {
-            const movie = await movieEmBreve(pageEmBreve);
-            if(movie) {
+            const movie = await movieOrTv(pageEmBreve, { type: "movie", category: "upcoming" });
+            if (movie) {
                 setFilmesEmBreve(movie);
             }
         }
@@ -65,11 +64,11 @@ export const MainMovie = () => {
     return (
         <main className="mt-5">
             <section className="">
-                <Section title="Acabaram de chegar" list={filmesNovos} pageList={pageNews} setPageList={setPageNews}/>
-                <Section title="Em Alta" list={filmesAlta} pageList={pageAlta} setPageList={setPageAlta}/>
-                <Section title="Populares" list={filmesPolular} pageList={pagePopular} setPageList={setPagePopular}/>
-                <Section title="Mais Clasificados" list={filmesClasificados} pageList={pageClasificados} setPageList={setPageClasificados}/>
-                <Section title="Próximos Lançamentos" list={filmesEmBreve} pageList={pageEmBreve} setPageList={setPageEmBreve}/>
+                <Section title="Acabaram de chegar" list={filmesNovos} pageList={pageNews} setPageList={setPageNews} />
+                <Section title="Em Alta" list={filmesAlta} pageList={pageAlta} setPageList={setPageAlta} />
+                <Section title="Populares" list={filmesPolular} pageList={pagePopular} setPageList={setPagePopular} />
+                <Section title="Mais Clasificados" list={filmesClasificados} pageList={pageClasificados} setPageList={setPageClasificados} />
+                <Section title="Próximos Lançamentos" list={filmesEmBreve} pageList={pageEmBreve} setPageList={setPageEmBreve} />
             </section>
         </main>
     );
