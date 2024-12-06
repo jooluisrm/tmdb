@@ -3,9 +3,10 @@ import { Search } from "lucide-react";
 type Props = {
     inputSearch: string;
     setInputSearch: (value: string) => void
+    onPress: () => void;
 }
 
-export const Input = ({ inputSearch, setInputSearch }: Props) => {
+export const Input = ({ inputSearch, setInputSearch, onPress }: Props) => {
     return (
         <div className="w-full flex items-center relative">
             <Search className="absolute transform translate-x-5" />
@@ -16,6 +17,7 @@ export const Input = ({ inputSearch, setInputSearch }: Props) => {
                 autoFocus
                 value={inputSearch}
                 onChange={(e) => setInputSearch(e.target.value)}
+                onKeyUp={() => onPress()}
             />
         </div>
 
