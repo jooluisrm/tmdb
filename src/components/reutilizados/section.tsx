@@ -92,7 +92,7 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
                 className="relative overflow-hidden smooth-scroll mx-auto" // Adicionando a classe para transição suave
                 ref={carrouselRef}
             >
-                <Item data={list} />
+                <Item data={list} typeSection="1"/>
             </div>
 
             {/* Setas de Navegação */}

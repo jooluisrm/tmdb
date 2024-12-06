@@ -8,6 +8,7 @@ export const Input = () => {
                 type="search"
                 placeholder="Encontre filmes, séries e muito mais"
                 className="w-full py-5 px-16 text-xl bg-gray-900 rounded-md"
+                autoFocus
             />
         </div>
 
