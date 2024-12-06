@@ -65,7 +65,7 @@ export const MainMovie = () => {
         <main className="mt-5">
             <section className="">
                 <Section title="Estreias Recentes" list={filmesNovos} pageList={pageNews} setPageList={setPageNews} />
-                <Section title="Em Alta" list={filmesAlta} pageList={pageAlta} setPageList={setPageAlta} />
+                <Section title="Em Alta" list={filmesAlta}/>
                 <Section title="Populares" list={filmesPolular} pageList={pagePopular} setPageList={setPagePopular} />
                 <Section title="Mais Bem Avaliados" list={filmesClasificados} pageList={pageClasificados} setPageList={setPageClasificados} />
                 <Section title="Próximos Lançamentos" list={filmesEmBreve} pageList={pageEmBreve} setPageList={setPageEmBreve} />

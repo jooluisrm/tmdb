@@ -27,21 +27,21 @@ export const Main = () => {
 
         const carregarSeriesEmAlta = async () => {
             const series = await seriesTrending();
-            if(series) {
+            if (series) {
                 setSeriesAlta(series);
             }
         }
 
         const carregarPersonEmAlta = async () => {
             const person = await peopleTrending();
-            if(person) {
+            if (person) {
                 setPersonAlta(person);
             }
         }
 
         const carregarAllEmAlta = async () => {
             const all = await allTrending();
-            if(all) {
+            if (all) {
                 setAllAlta(all);
             }
         }
@@ -55,10 +55,10 @@ export const Main = () => {
     return (
         <main className="mt-5">
             <section className="">
-                <Section title="Filmes & Séries em Alta" list={allAlta} pageList={pageAllAlta} setPageList={setPageAllAlta}/>
-                <Section title="Filmes em Alta" list={filmesAlta} pageList={pageFilmesAlta} setPageList={setPageFilmesAlta}/>
-                <Section title="Séries em Alta" list={seriesAlta} pageList={pageSeriesAlta} setPageList={setPageSeriesAlta}/>
-                <Section title="Atores & Atrizes Famosos(a)" list={personAlta} pageList={pagePersonAlta} setPageList={setPagePersonAlta}/>
+                <Section title="Filmes & Séries em Alta" list={allAlta} />
+                <Section title="Filmes em Alta" list={filmesAlta} />
+                <Section title="Séries em Alta" list={seriesAlta} />
+                <Section title="Atores & Atrizes Famosos(a)" list={personAlta} />
             </section>
         </main>
     );

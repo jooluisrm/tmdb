@@ -6,12 +6,11 @@ import { ArrowSection } from "./arrowSection";
 type Props = {
     title: string;
     list: MediaItem[];
-    pageList: number;
-    setPageList: (n: number) => void;
+    pageList?: number;
+    setPageList?: (n: number) => void;
 }
 
 export const Section = ({ title, list, pageList, setPageList }: Props) => {
-    const [isHovered, setIsHovered] = useState(false);
 
     const [isHoveredLeft, setIsHoveredLeft] = useState(false); // setas unitarias
     const [isHoveredRight, setIsHoveredRight] = useState(false); // teminar
@@ -26,7 +25,6 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
             // Checa as condições ao ativar o hover
             hiddenSeta();
         }
-        
     };
 
     // Move o carrossel para a esquerda ou para a direita
@@ -39,8 +37,10 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
                 if (carrouselRef.current.scrollLeft <= 0) {
                     // Se estiver no início, vai para o final
 
-                    if (pageList > 1) { // mudando a pagina -
-                        setPageList(pageList - 1);
+                    if (pageList && setPageList) {
+                        if (pageList > 1) { // mudando a pagina -
+                            setPageList(pageList - 1);
+                        }
                     }
 
                     carrouselRef.current.scrollLeft = maxScroll;
@@ -50,7 +50,10 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
             } else {
                 if (carrouselRef.current.scrollLeft >= maxScroll) {
                     // Se estiver no final, vai para o início
-                    setPageList(pageList + 1); // mudando a pagina +
+                    if (pageList && setPageList) {
+                        setPageList(pageList + 1); // mudando a pagina +
+                    }
+
                     carrouselRef.current.scrollLeft = 0
                 } else {
                     carrouselRef.current.scrollLeft += scrollAmount;
@@ -60,13 +63,10 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
     };
     const hiddenSeta = () => {
         if (carrouselRef.current) {
-            if (carrouselRef.current.scrollLeft <= 0 && pageList === 1) {
-                setIsHoveredLeft(false);
+            if (pageList) {
+                carrouselRef.current.scrollLeft <= 0 && pageList === 1 ? setIsHoveredLeft(false) : setIsHoveredLeft(true);
             }
-            else {
-                setIsHoveredLeft(true);
-            }
-            
+            carrouselRef.current.scrollLeft <= 0 ? setIsHoveredLeft(false) : setIsHoveredLeft(true);
         }
     }
 
@@ -75,7 +75,7 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
             const interval = setInterval(() => {
                 hiddenSeta();
             }, 100); // Verifica a cada 100ms para não sobrecarregar o navegador
-    
+
             return () => clearInterval(interval); // Limpa o intervalo quando o hover termina
         }
     }, [isHoveredLeft, isHoveredRight, pageList]);
