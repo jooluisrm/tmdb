@@ -9,7 +9,7 @@ import { allTrending } from "@/services/axiosConfig";
 export const SearchMain = () => {
 
     const [inputSearch, setInputSearch] = useState("");
-    const [allAlta, setAllAlta] = useState([]); 
+    const [allAlta, setAllAlta] = useState([]);
 
     useEffect(() => {
         const carregarAllEmAlta = async () => {
@@ -24,12 +24,19 @@ export const SearchMain = () => {
     return (
         <main className="container mx-auto">
             <div>
-                <Input />
+                <Input inputSearch={inputSearch} setInputSearch={setInputSearch} />
             </div>
+            {
+                inputSearch.trim().length === 0 ?
+                    <div>
+                        <Section2 title="Títulos populares" list={allAlta} />
+                    </div>
+                :
+                <div>
+                    pesquisou
+                </div>
+            }
 
-            <div>
-                <Section2 title="Títulos populares" list={allAlta}/>
-            </div>
         </main>
     );
 }
