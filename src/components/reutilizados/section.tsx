@@ -64,7 +64,7 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
     const hiddenSeta = () => {
         if (carrouselRef.current) {
             if (pageList) {
-                carrouselRef.current.scrollLeft <= 0 && pageList === 1 ? setIsHoveredLeft(false) : setIsHoveredLeft(true);
+                return carrouselRef.current.scrollLeft <= 0 && pageList === 1 ? setIsHoveredLeft(false) : setIsHoveredLeft(true);
             }
             carrouselRef.current.scrollLeft <= 0 ? setIsHoveredLeft(false) : setIsHoveredLeft(true);
         }
