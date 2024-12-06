@@ -1,5 +1,5 @@
 import { MediaItem } from "@/types/movieType";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Item } from "./item";
 import { ArrowSection } from "./arrowSection";
 
@@ -12,11 +12,21 @@ type Props = {
 
 export const Section = ({ title, list, pageList, setPageList }: Props) => {
     const [isHovered, setIsHovered] = useState(false);
+
+    const [isHoveredLeft, setIsHoveredLeft] = useState(false); // setas unitarias
+    const [isHoveredRight, setIsHoveredRight] = useState(false); // teminar
+
     const carrouselRef = useRef<HTMLDivElement | null>(null);
 
     // Controla o hover nas setas
     const handleHover = (hover: boolean) => {
-        setIsHovered(hover);
+        setIsHoveredLeft(hover);
+        setIsHoveredRight(hover);
+        if (hover) {
+            // Checa as condições ao ativar o hover
+            hiddenSeta();
+        }
+        
     };
 
     // Move o carrossel para a esquerda ou para a direita
@@ -41,7 +51,6 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
                 if (carrouselRef.current.scrollLeft >= maxScroll) {
                     // Se estiver no final, vai para o início
                     setPageList(pageList + 1); // mudando a pagina +
-
                     carrouselRef.current.scrollLeft = 0
                 } else {
                     carrouselRef.current.scrollLeft += scrollAmount;
@@ -49,6 +58,27 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
             }
         }
     };
+    const hiddenSeta = () => {
+        if (carrouselRef.current) {
+            if (carrouselRef.current.scrollLeft <= 0 && pageList === 1) {
+                setIsHoveredLeft(false);
+            }
+            else {
+                setIsHoveredLeft(true);
+            }
+            
+        }
+    }
+
+    useEffect(() => {
+        if (isHoveredLeft || isHoveredRight) {
+            const interval = setInterval(() => {
+                hiddenSeta();
+            }, 100); // Verifica a cada 100ms para não sobrecarregar o navegador
+    
+            return () => clearInterval(interval); // Limpa o intervalo quando o hover termina
+        }
+    }, [isHoveredLeft, isHoveredRight, pageList]);
 
     return (
         <div className="relative mt-10 container mx-auto" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
@@ -66,8 +96,8 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
             </div>
 
             {/* Setas de Navegação */}
-            <ArrowSection seta="left" hover={isHovered} onClick={() => handleArrowClick("left")} />
-            <ArrowSection seta="right" hover={isHovered} onClick={() => handleArrowClick("right")} />
+            <ArrowSection seta="left" hover={isHoveredLeft} onClick={() => handleArrowClick("left")} />
+            <ArrowSection seta="right" hover={isHoveredRight} onClick={() => handleArrowClick("right")} />
         </div>
     );
 };
