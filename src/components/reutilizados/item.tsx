@@ -33,7 +33,7 @@ export const Item = ({ data, typeSection }: Props) => {
                                 className={`object-cover h-full ${typeSection === "1" ? "min-w-52" : "w-52"}`}
                             />
                         )}
-                        {!item.media_type && (
+                        {item.media_type === "all" && (
                             <img
                                 src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
                                 alt={item.original_title}

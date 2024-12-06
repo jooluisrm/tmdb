@@ -76,6 +76,12 @@ export type MediaItem =
     gender: number;
     known_for_department: string;
     profile_path: string | null;
+  }
+  | {
+    media_type: "all";
+    id: number;
+    poster_path: string | null;
+    original_title: string;
   };
 
 
