@@ -70,6 +70,17 @@ export const movieOrTv = async (pageId: number, params: Categoria) => {
     }
 }
 
+// search
+
+export const searchMult = async (pageId: number, query: string) => {
+    try {
+        const response = await api.get(`/search/multi?query=${query}&include_adult=false&language=pt-BR&page=${pageId}`);
+        console.log(response.data.results);
+        return response.data.results;
+    } catch (error) {
+        console.log(`Erro ao buscar ${query}: `, error);
+    }
+}
 
 // carregar banner do filme
 
