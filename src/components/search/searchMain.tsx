@@ -29,7 +29,6 @@ export const SearchMain = () => {
                 setAllAlta(all);
             }
         }
-        
         carregarAllEmAlta();
         
     }, [searchList]);

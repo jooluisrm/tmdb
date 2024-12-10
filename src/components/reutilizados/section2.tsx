@@ -1,5 +1,6 @@
 import { MediaItem } from "@/types/movieType";
 import { Item } from "./item";
+import { Item2 } from "./item2";
 
 type Props = {
     title: string;
@@ -16,7 +17,7 @@ export const Section2 = ({ title, list }: Props) => {
 
             {/* Conteúdo dos Itens */}
             <div>
-                <Item data={list} typeSection="2"/>
+                <Item2 data={list}/>
             </div>
         </div>
     );

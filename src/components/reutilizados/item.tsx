@@ -9,7 +9,7 @@ export const Item = ({ data, typeSection }: Props) => {
     return (
         <div className={`${typeSection === "1" ? "flex gap-3" : "grid gap-2 grid-cols-6 2xl:grid-cols-7"}`}>
             {data.map((item: MediaItem) => (
-                <>
+                
                     <div key={item.id} className={`rounded-sm transition-all border-2 border-transparent hover:border-white cursor-pointer`}>
                         {item.media_type === "movie" && (
                             <img
@@ -42,7 +42,7 @@ export const Item = ({ data, typeSection }: Props) => {
                         )}
 
                     </div>
-                </>
+        
 
             ))}
         </div>
