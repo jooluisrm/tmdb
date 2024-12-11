@@ -1,15 +1,17 @@
 import { MediaItem, MediaItemWithoutType } from "@/types/movieType";
+import Link from "next/link";
 
 type Props = {
     data: MediaItem[];
     typeSection: "1" | "2";
+    typeList: string;
 }
 
-export const Item = ({ data, typeSection }: Props) => {
+export const Item = ({ data, typeSection, typeList }: Props) => {
     return (
         <div className={`${typeSection === "1" ? "flex gap-3" : "grid gap-2 grid-cols-6 2xl:grid-cols-7"}`}>
             {data.map((item: MediaItem) => (
-                
+                <Link href={`${typeList === "movie" && `/movie/${item.id}` || typeList === "tv" && `/tv/${item.id}` || typeList === "person" && `/person/${item.id}`}`}>
                     <div key={item.id} className={`rounded-sm transition-all border-2 border-transparent hover:border-white cursor-pointer`}>
                         {item.media_type === "movie" && (
                             <img
@@ -42,9 +44,9 @@ export const Item = ({ data, typeSection }: Props) => {
                         )}
 
                     </div>
-        
-
-            ))}
-        </div>
+                </Link>
+            ))
+            }
+        </div >
     );
 };

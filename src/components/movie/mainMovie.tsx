@@ -29,27 +29,27 @@ export const MainMovie = () => {
             }
         }
         const carregarFilmesNovos = async () => {
-            const movies = await movieOrTv(pageNews, { type: "movie", category: "now_playing" });
-            if (movies) {
-                setFilmesNovos(movies);
+            const movies: any = await movieOrTv(pageNews, { type: "movie", category: "now_playing" });
+            if (movies?.results) {
+                setFilmesNovos(movies.results);
             }
         }
         const carregarFilmesPolular = async () => {
             const movies = await movieOrTv(pagePopular, { type: "movie", category: "popular" });
-            if (movies) {
-                setFilmesPolular(movies);
+            if (movies?.results) {
+                setFilmesPolular(movies.results);
             }
         }
         const carregarFilmesClasificados = async () => {
             const movie = await movieOrTv(pageClasificados, { type: "movie", category: "top_rated" });
-            if (movie) {
-                setFilmesClasificados(movie);
+            if (movie?.results) {
+                setFilmesClasificados(movie.results);
             }
         }
         const carregarFilmesEmBreve = async () => {
             const movie = await movieOrTv(pageEmBreve, { type: "movie", category: "upcoming" });
-            if (movie) {
-                setFilmesEmBreve(movie);
+            if (movie?.results) {
+                setFilmesEmBreve(movie.results);
             }
         }
 
@@ -64,11 +64,11 @@ export const MainMovie = () => {
     return (
         <main className="mt-5">
             <section className="">
-                <Section title="Estreias Recentes" list={filmesNovos} pageList={pageNews} setPageList={setPageNews} />
-                <Section title="Em Alta" list={filmesAlta}/>
-                <Section title="Populares" list={filmesPolular} pageList={pagePopular} setPageList={setPagePopular} />
-                <Section title="Mais Bem Avaliados" list={filmesClasificados} pageList={pageClasificados} setPageList={setPageClasificados} />
-                <Section title="Próximos Lançamentos" list={filmesEmBreve} pageList={pageEmBreve} setPageList={setPageEmBreve} />
+                <Section title="Estreias Recentes" list={filmesNovos} type={"movie"} pageList={pageNews} setPageList={setPageNews} />
+                <Section title="Em Alta" list={filmesAlta} type={"movie"}/>
+                <Section title="Populares" list={filmesPolular} type={"movie"} pageList={pagePopular} setPageList={setPagePopular} />
+                <Section title="Mais Bem Avaliados" list={filmesClasificados} type={"movie"} pageList={pageClasificados} setPageList={setPageClasificados} />
+                <Section title="Próximos Lançamentos" list={filmesEmBreve} type={"movie"} pageList={pageEmBreve} setPageList={setPageEmBreve} />
             </section>
         </main>
     );

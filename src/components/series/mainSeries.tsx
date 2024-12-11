@@ -28,26 +28,26 @@ export const MainSeries = () => {
         }
         const carregarSeriesNovas = async () => {
             const series = await movieOrTv(pageNews, {type: "tv", category: "airing_today"});
-            if(series) {
-                setSeriesNovos(series);
+            if(series?.results) {
+                setSeriesNovos(series.results);
             }
         }
         const carregarSeriesPopular = async () => {
             const series = await movieOrTv(pagePopular, {type: "tv", category: "popular"});
-            if(series) {
-                setSeriesPolular(series);
+            if(series?.results) {
+                setSeriesPolular(series.results);
             }
         }
         const carregarSeriesClasificadas = async () => {
             const series = await movieOrTv(pageClasificados, {type: "tv", category: "top_rated"});
-            if(series) {
-                setSeriesClasificados(series);
+            if(series?.results) {
+                setSeriesClasificados(series.results);
             }
         }
         const carregarSeriesEmBreve = async () => {
             const series = await movieOrTv(pageEmBreve, {type: "tv", category: "on_the_air"});
-            if(series) {
-                setSeriesEmBreve(series);
+            if(series?.results) {
+                setSeriesEmBreve(series.results);
             }
         }
 
@@ -60,11 +60,11 @@ export const MainSeries = () => {
     return (
         <main>
             <section className="">
-                <Section title="Novidades do Dia" list={seriesNovos} pageList={pageNews} setPageList={setPageNews} />
-                <Section title="Séries em Alta" list={seriesAlta} pageList={pageAlta} setPageList={setPageAlta} />
-                <Section title="As Mais Populares" list={seriesPolular} pageList={pagePopular} setPageList={setPagePopular} />
-                <Section title="Top Avaliações" list={seriesClasificados} pageList={pageClasificados} setPageList={setPageClasificados} />
-                <Section title="Séries Que Estão Por Vir" list={seriesEmBreve} pageList={pageEmBreve} setPageList={setPageEmBreve} />
+                <Section title="Novidades do Dia" list={seriesNovos} type="tv" pageList={pageNews} setPageList={setPageNews} />
+                <Section title="Séries em Alta" list={seriesAlta} type="tv" pageList={pageAlta} setPageList={setPageAlta} />
+                <Section title="As Mais Populares" list={seriesPolular} type="tv" pageList={pagePopular} setPageList={setPagePopular} />
+                <Section title="Top Avaliações" list={seriesClasificados} type="tv" pageList={pageClasificados} setPageList={setPageClasificados} />
+                <Section title="Séries Que Estão Por Vir" list={seriesEmBreve} type="tv" pageList={pageEmBreve} setPageList={setPageEmBreve} />
             </section>
         </main>
     );

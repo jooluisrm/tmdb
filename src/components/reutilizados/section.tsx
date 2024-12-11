@@ -8,9 +8,10 @@ type Props = {
     list: MediaItem[];
     pageList?: number;
     setPageList?: (n: number) => void;
+    type: "movie" | "tv" | "person";
 }
 
-export const Section = ({ title, list, pageList, setPageList }: Props) => {
+export const Section = ({ title, list, pageList, setPageList, type }: Props) => {
 
     const [isHoveredLeft, setIsHoveredLeft] = useState(false); // setas unitarias
     const [isHoveredRight, setIsHoveredRight] = useState(false); // teminar
@@ -92,7 +93,7 @@ export const Section = ({ title, list, pageList, setPageList }: Props) => {
                 className="relative overflow-hidden smooth-scroll mx-auto" // Adicionando a classe para transição suave
                 ref={carrouselRef}
             >
-                <Item data={list} typeSection="1"/>
+                <Item data={list} typeList={type} typeSection="1"/>
             </div>
 
             {/* Setas de Navegação */}

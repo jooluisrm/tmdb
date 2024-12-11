@@ -64,7 +64,12 @@ export const movieOrTv = async (pageId: number, params: Categoria) => {
     const { type, category } = params;
     try {
         const response = await api.get(`/${type}/${category}?language=pt-BR&page=${pageId}`);
-        return response.data.results;
+        console.log(response.data.results, type);
+        return {
+            results: response.data.results,
+            type
+        }
+        
     } catch (error) {
         console.log(`Erro ao buscar ${type} ${category}`, error);
     }
@@ -75,7 +80,6 @@ export const movieOrTv = async (pageId: number, params: Categoria) => {
 export const searchMult = async (pageId: number, query: string) => {
     try {
         const response = await api.get(`/search/multi?query=${query}&include_adult=false&language=pt-BR&page=${pageId}`);
-        console.log(response.data.results);
         return response.data.results;
     } catch (error) {
         console.log(`Erro ao buscar ${query}: `, error);
