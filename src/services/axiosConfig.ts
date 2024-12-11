@@ -11,7 +11,7 @@ const api = axios.create({
 export const movieTrending = async () => {
     try {
         const response = await api.get(`/trending/movie/day?language=pt-BR`);
-
+        
         return response.data.results;
     } catch (error) {
         console.error("Erro ao buscar filmes:", error);
@@ -31,7 +31,6 @@ export const seriesTrending = async () => {
 export const allTrending = async () => {
     try {
         const response = await api.get("/trending/all/day?language=pt-BR");
-
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar all:", error)
