@@ -4,7 +4,7 @@ import Link from "next/link";
 type Props = {
     data: MediaItem[];
     typeSection: "1" | "2";
-    typeList: string;
+    typeList?: string;
 }
 
 export const Item = ({ data, typeSection, typeList }: Props) => {

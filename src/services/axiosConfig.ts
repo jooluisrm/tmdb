@@ -11,7 +11,7 @@ const api = axios.create({
 export const movieTrending = async () => {
     try {
         const response = await api.get(`/trending/movie/day?language=pt-BR`);
-        
+
         return response.data.results;
     } catch (error) {
         console.error("Erro ao buscar filmes:", error);
@@ -68,7 +68,7 @@ export const movieOrTv = async (pageId: number, params: Categoria) => {
             results: response.data.results,
             type
         }
-        
+
     } catch (error) {
         console.log(`Erro ao buscar ${type} ${category}`, error);
     }
@@ -90,11 +90,72 @@ export const searchMult = async (pageId: number, query: string) => {
 export const bannerFilme = async (id: number) => {
     try {
         const response = await api.get(`https://api.themoviedb.org/3/movie/${id}/images`);
-        console.log(response.data.posters[0].file_path);
         return response.data.backdrops[0].file_path;
 
     } catch (error) {
-        console.log("Error ao buscar banner:", error)
+        console.log("Error ao buscar banner:", error);
+    }
+}
+
+// Tem q implementar
+
+// Details filme
+
+export const detailsFilmes = async (id: number) => {
+    try {
+        const response = await api.get(`movie/${id}?language=pt-BR`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log("Error ao buscar details:", error);
+    }
+}
+
+// elenco filme 
+
+export const creditsFilmes = async (id: number) => {
+    try {
+        const response = await api.get(`movie/${id}/credits?language=pt-BR`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log("Error ao buscar credits:", error);
+    }
+}
+
+// Recomendado filme
+
+export const recommendationsFilmes = async (id: number, pageId: number) => {
+    try {
+        const response = await api.get(`movie/${id}/recommendations?language=en-US&page=${pageId}`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log("Error ao buscar recommendations:", error);
+    }
+}
+
+// Similar filme
+
+export const similarFilmes = async (id: number, pageId: number) => {
+    try {
+        const response = await api.get(`movie/${id}/similar?language=pt-BR&page=${pageId}`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log("Error ao buscar similar:", error);
+    }
+}
+
+// video filme 
+
+export const videoFilme = async (id: number) => {
+    try {
+        const response = await api.get(`movie/${id}/videos?language=pt-BR`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log("Error ao buscar video:", error);
     }
 }
 

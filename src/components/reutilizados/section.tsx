@@ -8,7 +8,7 @@ type Props = {
     list: MediaItem[];
     pageList?: number;
     setPageList?: (n: number) => void;
-    type: "movie" | "tv" | "person";
+    type?: "movie" | "tv" | "person";
 }
 
 export const Section = ({ title, list, pageList, setPageList, type }: Props) => {
