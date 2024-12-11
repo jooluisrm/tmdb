@@ -14,7 +14,7 @@ type Props = {
 const MovieSelect = ({ params }: Props) => {
     return (
         <div className="bg-black min-h-screen text-white">
-            <BannerInicial />
+            <BannerInicial idItem={params.id}/>
         </div>
     )
 }
