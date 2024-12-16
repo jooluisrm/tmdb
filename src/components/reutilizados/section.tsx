@@ -2,6 +2,7 @@ import { MediaItem } from "@/types/movieType";
 import { useEffect, useRef, useState } from "react";
 import { Item } from "./item";
 import { ArrowSection } from "./arrowSection";
+import { recommendationsFilmes } from "@/services/axiosConfig";
 
 type Props = {
     title: string;
@@ -52,7 +53,11 @@ export const Section = ({ title, list, pageList, setPageList, type }: Props) => 
                 if (carrouselRef.current.scrollLeft >= maxScroll) {
                     // Se estiver no final, vai para o início
                     if (pageList && setPageList) {
+
                         setPageList(pageList + 1); // mudando a pagina +
+                        if(list.length === 0) {
+                            setPageList(pageList -1)
+                        }
                     }
 
                     carrouselRef.current.scrollLeft = 0
@@ -81,6 +86,7 @@ export const Section = ({ title, list, pageList, setPageList, type }: Props) => 
         }
     }, [isHoveredLeft, isHoveredRight, pageList]);
 
+
     return (
         <div className="relative mt-10 container mx-auto" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
             {/* Título da Seção */}
@@ -93,7 +99,7 @@ export const Section = ({ title, list, pageList, setPageList, type }: Props) => 
                 className="relative overflow-hidden smooth-scroll mx-auto" // Adicionando a classe para transição suave
                 ref={carrouselRef}
             >
-                <Item data={list} typeList={type} typeSection="1"/>
+                <Item data={list} typeList={type} typeSection="1" />
             </div>
 
             {/* Setas de Navegação */}

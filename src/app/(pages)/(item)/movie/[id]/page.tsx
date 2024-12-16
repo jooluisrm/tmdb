@@ -1,4 +1,5 @@
 import { BannerInicial } from "@/components/reutilizados/bannerInicial";
+import { TableFooter } from "@/components/reutilizados/tableFooter";
 import { detailsFilmes } from "@/services/axiosConfig";
 import { Metadata } from "next";
 
@@ -22,6 +23,7 @@ const MovieSelect = ({ params }: Props) => {
     return (
         <div className="bg-black min-h-screen text-white">
             <BannerInicial idItem={params.id} />
+            <TableFooter id={params.id}/>
         </div>
     );
 }
