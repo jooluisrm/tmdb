@@ -33,7 +33,7 @@ export type Person = {
 
 export type MediaItem =
   | {
-    media_type: "movie";
+    media_type: "movie" | null;  // alteração add "null"
     backdrop_path: string | null;
     id: number;
     title: string;
