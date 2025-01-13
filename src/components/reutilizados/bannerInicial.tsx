@@ -47,7 +47,10 @@ export const BannerInicial = ({ idItem }: Props) => {
             backgroundRepeat: "no-repeat",
         }} className="h-screen w-full flex items-end">
             <div className="px-10 py-10">
-                <div className="my-2 font-bold text-2xl">{responseDetails?.title}</div>
+                <div>
+                    <img src={`https://image.tmdb.org/t/p/original/${responseDetails?.poster_path}`} alt="" className="w-40 2xl:w-56"/>
+                </div>
+                <div className="my-5 font-bold text-5xl">{responseDetails?.title}</div>
 
                 <button className="flex gap-2 bg-white text-black py-3 px-10 rounded-md font-bold w-full justify-center min-w-80 max-w-80"><PlayIcon className=""/> Ver trailer</button>
                 <div className="flex gap-3 py-2">
@@ -55,7 +58,7 @@ export const BannerInicial = ({ idItem }: Props) => {
                         <p className="font-bold">{item.name}</p>
                     ))}
                 </div>
-                <div className="w-full text-lg text-gray-400 shadow-lg">{responseDetails?.overview}</div>
+                <div className="w-[800px] text-lg text-gray-400 shadow-lg 2xl:w-[1000px]">{responseDetails?.overview}</div>
 
             </div>
         </div>

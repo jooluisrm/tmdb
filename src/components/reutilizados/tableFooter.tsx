@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Section } from "./section";
 import { useEffect, useState } from "react";
-import { recommendationsFilmes } from "@/services/axiosConfig";
+import { recommendationsFilmes, similarFilmes } from "@/services/axiosConfig";
 
 type Props = {
     id: number;
@@ -12,8 +12,10 @@ type Props = {
 export const TableFooter = ({ id }: Props) => {
 
     const [listRecomendados, setListRecommendados] = useState([]);
+    const [listSimilares, setListeSimilares] = useState([]);
 
     const [pageIdRecomendados, setPageIdRecomendados] = useState(1);
+    const [pageIdSimilares, setPageIdSimilares] = useState(1);
 
     useEffect(() => {
         const carregarFilmesRecomendados = async () => {
@@ -22,8 +24,15 @@ export const TableFooter = ({ id }: Props) => {
                 setListRecommendados(movie);
             }
         }
+        const carregarFilmesSimilares = async () => {
+            const movie = await similarFilmes(id, pageIdSimilares);
+            if(movie) {
+                setListeSimilares(movie);
+            }
+        }
         carregarFilmesRecomendados();
-    }, [pageIdRecomendados]);
+        carregarFilmesSimilares();
+    }, [pageIdRecomendados, pageIdSimilares]);
 
     return (
         <div className="container mx-auto">
@@ -43,6 +52,7 @@ export const TableFooter = ({ id }: Props) => {
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value="recomendados">
+                    <Section list={listSimilares} title="Similares" pageList={pageIdSimilares} setPageList={setPageIdSimilares}/>
                     <Section list={listRecomendados} title="Recomendados" pageList={pageIdRecomendados} setPageList={setPageIdRecomendados}/>
                 </TabsContent>
                 <TabsContent value="detalhes">

@@ -54,10 +54,14 @@ export const Section = ({ title, list, pageList, setPageList, type }: Props) => 
                     // Se estiver no final, vai para o início
                     if (pageList && setPageList) {
 
-                        setPageList(pageList + 1); // mudando a pagina +
-                        if(list.length === 0) {
-                            setPageList(pageList -1)
-                        }
+                        // mudando a pagina +
+                         
+                        setPageList(pageList + 1);
+                        alert(list.length)
+                        
+
+
+
                     }
 
                     carrouselRef.current.scrollLeft = 0

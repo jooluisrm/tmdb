@@ -128,7 +128,7 @@ export const creditsFilmes = async (id: number) => {
 export const recommendationsFilmes = async (id: number, pageId: number) => {
     try {
         const response = await api.get(`movie/${id}/recommendations?language=en-US&page=${pageId > 2 ? pageId = 1 : pageId}`);
-        console.log(response.data.results);
+        //console.log(response.data.results);
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar recommendations:", error);
@@ -140,8 +140,8 @@ export const recommendationsFilmes = async (id: number, pageId: number) => {
 export const similarFilmes = async (id: number, pageId: number) => {
     try {
         const response = await api.get(`movie/${id}/similar?language=pt-BR&page=${pageId}`);
-        //console.log(response.data);
-        return response.data;
+        console.log(response.data);
+        return response.data.results;
     } catch (error) {
         console.log("Error ao buscar similar:", error);
     }
