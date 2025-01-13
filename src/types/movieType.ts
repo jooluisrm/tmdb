@@ -146,5 +146,34 @@ export type MovieDetails = {
   vote_count: number;
 };
 
-
+export type MediaCastCrew = {
+  id: number; // Defaults to 0
+  cast: {
+      adult: boolean; // Defaults to true
+      gender: number; // Defaults to 0
+      id: number; // Defaults to 0
+      known_for_department: string;
+      name: string;
+      original_name: string;
+      popularity: number; // Defaults to 0
+      profile_path: string | null; // Pode ser null se não existir imagem
+      cast_id: number; // Defaults to 0
+      character: string;
+      credit_id: string;
+      order: number; // Defaults to 0
+  }[];
+  crew: {
+      adult: boolean; // Defaults to true
+      gender: number; // Defaults to 0
+      id: number; // Defaults to 0
+      known_for_department: string;
+      name: string;
+      original_name: string;
+      popularity: number; // Defaults to 0
+      profile_path: string | null; // Pode ser null se não existir imagem
+      credit_id: string;
+      department: string;
+      job: string;
+  }[];
+};
 

@@ -3,7 +3,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Section } from "./section";
 import { useEffect, useState } from "react";
-import { recommendationsFilmes, similarFilmes } from "@/services/axiosConfig";
+import { creditsFilmes, recommendationsFilmes, similarFilmes } from "@/services/axiosConfig";
+import { Elenco } from "./elenco";
+import { MediaCastCrew } from "@/types/movieType";
 
 type Props = {
     id: number;
@@ -12,10 +14,12 @@ type Props = {
 export const TableFooter = ({ id }: Props) => {
 
     const [listRecomendados, setListRecommendados] = useState([]);
-    const [listSimilares, setListeSimilares] = useState([]);
+    const [listSimilares, setListSimilares] = useState([]);
+    const [listElenco, setListElenco] = useState<MediaCastCrew | any>();
 
     const [pageIdRecomendados, setPageIdRecomendados] = useState(1);
     const [pageIdSimilares, setPageIdSimilares] = useState(1);
+    const [pageIdElenco, setPageIdElenco] = useState(1)
 
     useEffect(() => {
         const carregarFilmesRecomendados = async () => {
@@ -27,11 +31,18 @@ export const TableFooter = ({ id }: Props) => {
         const carregarFilmesSimilares = async () => {
             const movie = await similarFilmes(id, pageIdSimilares);
             if(movie) {
-                setListeSimilares(movie);
+                setListSimilares(movie);
+            }
+        }
+        const carregarElenco = async () => {
+            const elenco = await creditsFilmes(id);
+            if(elenco) {
+                setListElenco(elenco);
             }
         }
         carregarFilmesRecomendados();
         carregarFilmesSimilares();
+        carregarElenco();
     }, [pageIdRecomendados, pageIdSimilares]);
 
     return (
@@ -52,11 +63,11 @@ export const TableFooter = ({ id }: Props) => {
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value="recomendados">
-                    <Section list={listSimilares} title="Similares" pageList={pageIdSimilares} setPageList={setPageIdSimilares}/>
-                    <Section list={listRecomendados} title="Recomendados" pageList={pageIdRecomendados} setPageList={setPageIdRecomendados}/>
+                    <Section list={listSimilares} title="Similares" pageList={pageIdSimilares} setPageList={setPageIdSimilares} type="movie"/>
+                    <Section list={listRecomendados} title="Recomendados" pageList={pageIdRecomendados} setPageList={setPageIdRecomendados} type="movie"/>
                 </TabsContent>
                 <TabsContent value="detalhes">
-                    Conteúdo de detalhes.
+                    <Elenco listElenco={listElenco}/>
                 </TabsContent>
             </Tabs>
         </div>

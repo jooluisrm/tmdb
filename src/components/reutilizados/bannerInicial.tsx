@@ -46,7 +46,7 @@ export const BannerInicial = ({ idItem }: Props) => {
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
         }} className="h-screen w-full flex items-end">
-            <div className="px-10 py-10">
+            <div className="container mx-auto py-10">
                 <div>
                     <img src={`https://image.tmdb.org/t/p/original/${responseDetails?.poster_path}`} alt="" className="w-40 2xl:w-56"/>
                 </div>

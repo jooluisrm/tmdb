@@ -140,7 +140,7 @@ export const recommendationsFilmes = async (id: number, pageId: number) => {
 export const similarFilmes = async (id: number, pageId: number) => {
     try {
         const response = await api.get(`movie/${id}/similar?language=pt-BR&page=${pageId}`);
-        console.log(response.data);
+        //console.log(response.data);
         return response.data.results;
     } catch (error) {
         console.log("Error ao buscar similar:", error);
