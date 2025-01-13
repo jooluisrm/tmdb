@@ -47,7 +47,7 @@ export const TableFooter = ({ id }: Props) => {
     }, [pageIdRecomendados, pageIdSimilares]);
 
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto pb-10">
             <Tabs defaultValue="recomendados" className="w-full">
                 <TabsList className="bg-transparent">
                     <TabsTrigger
