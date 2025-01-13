@@ -58,7 +58,9 @@ export const BannerInicial = ({ idItem }: Props) => {
                         <p className="font-bold">{item.name}</p>
                     ))}
                 </div>
-                <div className="w-[800px] text-lg text-gray-400 shadow-lg 2xl:w-[1000px]">{responseDetails?.overview}</div>
+                <div className="w-[800px] text-lg text-gray-400 shadow-lg overflow-y-scroll scrollbar-track-transparent h-32 2xl:w-[1000px]">
+                    {responseDetails?.overview}
+                </div>
 
             </div>
         </div>

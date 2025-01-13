@@ -17,6 +17,11 @@
   background-color: rgba(0, 0, 0, 0.6); /* Aumenta a opacidade das setas */
 }
 
+/* esconder barra de rolagem */
+.overflow-y-scroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
