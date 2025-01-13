@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { creditsFilmes, recommendationsFilmes, similarFilmes } from "@/services/axiosConfig";
 import { Elenco } from "./elenco";
 import { MediaCastCrew } from "@/types/movieType";
+import { Equipe } from "./equipe";
 
 type Props = {
     id: number;
@@ -24,19 +25,19 @@ export const TableFooter = ({ id }: Props) => {
     useEffect(() => {
         const carregarFilmesRecomendados = async () => {
             const movie = await recommendationsFilmes(id, pageIdRecomendados);
-            if(movie) {
+            if (movie) {
                 setListRecommendados(movie);
             }
         }
         const carregarFilmesSimilares = async () => {
             const movie = await similarFilmes(id, pageIdSimilares);
-            if(movie) {
+            if (movie) {
                 setListSimilares(movie);
             }
         }
         const carregarElenco = async () => {
             const elenco = await creditsFilmes(id);
-            if(elenco) {
+            if (elenco) {
                 setListElenco(elenco);
             }
         }
@@ -63,11 +64,12 @@ export const TableFooter = ({ id }: Props) => {
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value="recomendados">
-                    <Section list={listSimilares} title="Similares" pageList={pageIdSimilares} setPageList={setPageIdSimilares} type="movie"/>
-                    <Section list={listRecomendados} title="Recomendados" pageList={pageIdRecomendados} setPageList={setPageIdRecomendados} type="movie"/>
+                    <Section list={listSimilares} title="Similares" pageList={pageIdSimilares} setPageList={setPageIdSimilares} type="movie" />
+                    <Section list={listRecomendados} title="Recomendados" pageList={pageIdRecomendados} setPageList={setPageIdRecomendados} type="movie" />
                 </TabsContent>
                 <TabsContent value="detalhes">
-                    <Elenco listElenco={listElenco}/>
+                    <Elenco listElenco={listElenco} />
+                    <Equipe listElenco={listElenco} />
                 </TabsContent>
             </Tabs>
         </div>
