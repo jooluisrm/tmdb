@@ -63,7 +63,7 @@ export const MainMovie = () => {
 
     return (
         <main className="mt-5">
-            <section className="">
+            <section className="pb-10">
                 <Section title="Estreias Recentes" list={filmesNovos} type={"movie"} pageList={pageNews} setPageList={setPageNews} />
                 <Section title="Em Alta" list={filmesAlta} type={"movie"}/>
                 <Section title="Populares" list={filmesPolular} type={"movie"} pageList={pagePopular} setPageList={setPagePopular} />

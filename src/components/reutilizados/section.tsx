@@ -89,7 +89,7 @@ export const Section = ({ title, list, pageList, setPageList, type }: Props) => 
 
 
     return (
-        <div className="relative mt-10 container mx-auto" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+        <div className="relative my-10 container mx-auto h-80" onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
             {/* Título da Seção */}
             <div className="text-xl font-bold mb-3 container mx-auto">
                 {title}
