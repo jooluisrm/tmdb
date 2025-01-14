@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeProvider } from "../theme-provider";
 
 type Props = {
     href: string;

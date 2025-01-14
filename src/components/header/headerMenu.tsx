@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { LiNav } from "./liNav";
+import { ThemeToggle } from "../reutilizados/ThemeToggle";
 
 export const HeaderMenu = () => {
 
@@ -35,6 +36,7 @@ export const HeaderMenu = () => {
                     <LiNav href="/series" navState={activeSection} onClick={clickLink} title="Séries" value="series"/>
                 </nav>
             </div>
+            
             <div>
                 <Link href="/search" passHref legacyBehavior>
                     <Search className={`transition-all cursor-pointer ${activeSection === 'search' && `text-white`} hover:text-white`} values="search" onClick={(value) => clickLink(value.currentTarget.getAttribute('values'))} />

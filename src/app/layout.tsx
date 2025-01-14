@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import "./globals.css";
 import { Metadata } from "next";
 import { HeaderMenu } from "@/components/header/headerMenu";
+import { ThemeProvider } from "@/components/theme-provider";
 
 
 export const metadata: Metadata = {
@@ -23,7 +24,14 @@ const Layout = ({ children }: Props) => {
                     <HeaderMenu />
                 </header>
                 <div className="">
-                    {children}
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                        disableTransitionOnChange
+                    >
+                        {children}
+                    </ThemeProvider>
                 </div>
             </body>
         </html>
