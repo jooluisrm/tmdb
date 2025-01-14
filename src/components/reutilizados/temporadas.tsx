@@ -25,12 +25,12 @@ export const Temporadas = ({ details }: Props) => {
                             <div className="flex flex-col gap-5">
                                 {details?.seasons.map((item) => (
                                     <div key={item.id} className="bg-black flex rounded-xl transition-all border border-black duration-200 hover:text-white hover:border-white">
-                                        <img src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.name} className="w-40 rounded-tl-xl rounded-bl-xl" />
+                                        <img src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.name} className="w-40 h-64 rounded-tl-xl rounded-bl-xl" />
                                         <div className="py-5 px-5 flex flex-col justify-center">
                                             <h1 className="font-extrabold text-xl">{item.name}</h1>
                                             <p className="pb-5"><span className="font-bold">{item.episode_count <= 9 ? "0"+item.episode_count : item.episode_count}</span> Episódios</p>
                                             <div className="flex flex-col gap-1">
-                                                <p>{item.overview}</p>
+                                                <p className="overflow-y-scroll h-28">{item.overview}</p>
                                                 <p><span className="font-bold">{item.vote_average} </span> Avaliação</p>
                                             </div>
                                         </div>
