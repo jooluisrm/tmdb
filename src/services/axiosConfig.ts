@@ -127,7 +127,7 @@ export const creditsFilmes = async (id: number) => {
 
 export const recommendationsFilmes = async (id: number, pageId: number) => {
     try {
-        const response = await api.get(`movie/${id}/recommendations?language=en-US&page=${pageId > 2 ? pageId = 1 : pageId}`);
+        const response = await api.get(`movie/${id}/recommendations?language=pt-BR&page=${pageId > 2 ? pageId = 1 : pageId}`);
         //console.log(response.data.results);
         return response.data.results;
     } catch (error) {
@@ -173,6 +173,8 @@ export const bannerSeries = async (id: number) => {
     }
 }
 
+// carregar details series
+
 export const detailsSeries = async (id: number) => {
     try {
         const response = await api.get(`tv/${id}?language=pt-BR`);
@@ -195,5 +197,40 @@ export const videoSerie = async (id: number) => {
     }
 }
 
+// Recomendado serie
+
+export const recommendationsSerie = async (id: number, pageId: number) => {
+    try {
+        const response = await api.get(`tv/${id}/recommendations?language=pt-BR&page=${pageId > 2 ? pageId = 1 : pageId}`);
+        //console.log(response.data.results);
+        return response.data.results;
+    } catch (error) {
+        console.log("Error ao buscar recommendations:", error);
+    }
+}
+
+// Similar serie
+
+export const similarSerie = async (id: number, pageId: number) => {
+    try {
+        const response = await api.get(`tv/${id}/similar?language=pt-BR&page=${pageId}`);
+        //console.log(response.data);
+        return response.data.results;
+    } catch (error) {
+        console.log("Error ao buscar similar:", error);
+    }
+}
+
+// elenco Serie 
+
+export const creditsSerie = async (id: number) => {
+    try {
+        const response = await api.get(`tv/${id}/credits?language=pt-BR`);
+        //console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log("Error ao buscar credits:", error);
+    }
+}
 export default api;
 

@@ -1,4 +1,5 @@
 import { BannerInicial } from "@/components/reutilizados/bannerInicial";
+import { TableFooter } from "@/components/reutilizados/tableFooter";
 import { detailsSeries } from "@/services/axiosConfig";
 import { Metadata } from "next";
 
@@ -22,7 +23,7 @@ const SerieSelect = ({ params }: Props) => {
     return (
         <div className="bg-black min-h-screen text-white">
             <BannerInicial idItem={params.id} type="tv"/>
-            {/*<TableFooter id={params.id}/>*/}
+            <TableFooter id={params.id} type="tv"/>
         </div>
     );
 }

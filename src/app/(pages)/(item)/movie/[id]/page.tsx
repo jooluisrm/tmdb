@@ -23,7 +23,7 @@ const MovieSelect = ({ params }: Props) => {
     return (
         <div className="bg-black min-h-screen text-white">
             <BannerInicial idItem={params.id} type="movie"/>
-            <TableFooter id={params.id}/>
+            <TableFooter id={params.id} type="movie"/>
         </div>
     );
 }
