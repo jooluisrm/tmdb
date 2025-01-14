@@ -6,6 +6,8 @@ import { MovieDetails } from "@/types/movieType";
 import { PlayIcon } from "lucide-react";
 import { MostrarTrailer } from "./mostrarTrailer";
 import { TvShowResponse } from "@/types/tvType";
+import { ButtonBannerInicial } from "./buttonBannerInicial";
+import { Temporadas } from "./temporadas";
 
 type Props = {
     idItem: number;
@@ -102,13 +104,18 @@ export const BannerInicial = ({ idItem, type }: Props) => {
                 </div>
                 <div className="my-5 font-bold text-5xl">{type === "movie" ? responseDetailsMovie?.title : responseDetailsTv?.name}</div>
 
-                {
-                    type === "movie"
-                        ?
-                        <MostrarTrailer trailer={responseTrailerMovie} detailsFilmes={responseDetailsMovie} />
-                        :
-                        <MostrarTrailer trailer={responseTrailerTv} detailsSeries={responseDetailsTv} />
-                }
+                <div className="flex gap-2">
+                    {
+                        type === "movie"
+                            ?
+                            <MostrarTrailer trailer={responseTrailerMovie} detailsFilmes={responseDetailsMovie} />
+                            :
+                            <MostrarTrailer trailer={responseTrailerTv} detailsSeries={responseDetailsTv} />
+                    }
+                    {
+                        type === "tv" &&  <Temporadas details={responseDetailsTv}/>
+                    }
+                </div>
 
                 <div className="flex gap-3 py-2">
                     {
