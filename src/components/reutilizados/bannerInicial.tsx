@@ -1,9 +1,10 @@
 "use client"
 
-import { bannerFilme, detailsFilmes } from "@/services/axiosConfig";
+import { bannerFilme, detailsFilmes, videoFilme } from "@/services/axiosConfig";
 import { useEffect, useState } from "react";
 import { MovieDetails } from "@/types/movieType";
 import { PlayIcon } from "lucide-react";
+import { MostrarTrailer } from "./mostrarTrailer";
 
 type Props = {
     idItem: number;
@@ -13,11 +14,12 @@ export const BannerInicial = ({ idItem }: Props) => {
 
     const [linkBanner, setLinkBanner] = useState("");
     const [responseDetails, setResponseDetails] = useState<MovieDetails | null>(null);
+    const [trailerMovie, setTrailerMovie] = useState();
 
     useEffect(() => {
         const carregarBanner = async () => {
             const banner = await bannerFilme(idItem);
-            console.log(banner);
+            //console.log(banner);
             if (banner) {
                 setLinkBanner(banner);
             }
@@ -26,11 +28,19 @@ export const BannerInicial = ({ idItem }: Props) => {
         const carregarDetails = async () => {
             const details: MovieDetails = await detailsFilmes(idItem);
             if (details) {
-                console.log(details.genres[0].name);
+                //console.log(details.genres[0].name);
                 setResponseDetails(details);
             }
         }
+        const carregarTrailer = async () => {
+            const trailer = await videoFilme(idItem);
+            if(trailer) {
+                console.log(trailer.results[0]);
+                setTrailerMovie(trailer.results[0]);
+            }
+        }
 
+        carregarTrailer();
         carregarDetails();
         carregarBanner();
     }, [idItem])
@@ -52,7 +62,7 @@ export const BannerInicial = ({ idItem }: Props) => {
                 </div>
                 <div className="my-5 font-bold text-5xl">{responseDetails?.title}</div>
 
-                <button className="flex gap-2 bg-white text-black py-3 px-10 rounded-md font-bold w-full justify-center min-w-80 max-w-80"><PlayIcon className=""/> Ver trailer</button>
+                <MostrarTrailer />
                 <div className="flex gap-3 py-2">
                     {responseDetails?.genres.map((item) => (
                         <p className="font-bold">{item.name}</p>
