@@ -159,5 +159,41 @@ export const videoFilme = async (id: number) => {
     }
 }
 
+// Series
+
+// carregar banner da serie
+
+export const bannerSeries = async (id: number) => {
+    try {
+        const response = await api.get(`https://api.themoviedb.org/3/tv/${id}/images`);
+        return response.data.backdrops[0].file_path;
+
+    } catch (error) {
+        console.log("Error ao buscar banner:", error);
+    }
+}
+
+export const detailsSeries = async (id: number) => {
+    try {
+        const response = await api.get(`tv/${id}?language=pt-BR`);
+        //console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log("Error ao buscar detalhes series");
+    }
+}
+
+// video serie 
+
+export const videoSerie = async (id: number) => {
+    try {
+        const response = await api.get(`tv/${id}/videos?language=pt-BR`);
+        //console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log("Error ao buscar video:", error);
+    }
+}
+
 export default api;
 

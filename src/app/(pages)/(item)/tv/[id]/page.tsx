@@ -1,6 +1,5 @@
 import { BannerInicial } from "@/components/reutilizados/bannerInicial";
-import { TableFooter } from "@/components/reutilizados/tableFooter";
-import { detailsFilmes } from "@/services/axiosConfig";
+import { detailsSeries } from "@/services/axiosConfig";
 import { Metadata } from "next";
 
 type Props = {
@@ -11,21 +10,21 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // Carrega os detalhes do filme com base no ID
-    const movie = await detailsFilmes(params.id);
+    const tv = await detailsSeries(params.id);
 
     return {
-        title: movie?.title || "Detalhes do Filme",
+        title: tv?.name || "Detalhes da Serie",
     };
 }
 
-const MovieSelect = ({ params }: Props) => {
+const SerieSelect = ({ params }: Props) => {
 
     return (
         <div className="bg-black min-h-screen text-white">
-            <BannerInicial idItem={params.id} type="movie"/>
-            <TableFooter id={params.id}/>
+            <BannerInicial idItem={params.id} type="tv"/>
+            {/*<TableFooter id={params.id}/>*/}
         </div>
     );
 }
 
-export default MovieSelect;
+export default SerieSelect;

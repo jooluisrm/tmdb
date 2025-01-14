@@ -190,3 +190,4 @@ export type ResultItem = {
   published_at: string;
   id: string;
 };
+
