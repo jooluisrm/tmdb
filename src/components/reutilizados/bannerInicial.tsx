@@ -14,7 +14,7 @@ export const BannerInicial = ({ idItem }: Props) => {
 
     const [linkBanner, setLinkBanner] = useState("");
     const [responseDetails, setResponseDetails] = useState<MovieDetails | null>(null);
-    const [trailerMovie, setTrailerMovie] = useState();
+    const [trailerMovie, setTrailerMovie] = useState(null);
 
     useEffect(() => {
         const carregarBanner = async () => {
@@ -62,7 +62,7 @@ export const BannerInicial = ({ idItem }: Props) => {
                 </div>
                 <div className="my-5 font-bold text-5xl">{responseDetails?.title}</div>
 
-                <MostrarTrailer />
+                <MostrarTrailer trailer={trailerMovie} detailsFilmes={responseDetails}/>
                 <div className="flex gap-3 py-2">
                     {responseDetails?.genres.map((item) => (
                         <p className="font-bold">{item.name}</p>

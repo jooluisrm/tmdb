@@ -177,3 +177,16 @@ export type MediaCastCrew = {
   }[];
 };
 
+
+export type ResultItem = {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number; // Defaults to 0
+  type: string;
+  official: boolean; // Defaults to true
+  published_at: string;
+  id: string;
+};
