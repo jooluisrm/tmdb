@@ -99,9 +99,15 @@ export const BannerInicial = ({ idItem, type }: Props) => {
             backgroundRepeat: "no-repeat",
         }} className="h-screen w-full flex items-end">
             <div className="container mx-auto py-10">
-                <div>
-                    <img src={`https://image.tmdb.org/t/p/original/${type === "movie" ? responseDetailsMovie?.poster_path : responseDetailsTv?.poster_path}`} alt="" className="w-40 2xl:w-56" />
+                <div className="relative w-40 2xl:w-56">
+                    <img
+                        src={`https://image.tmdb.org/t/p/original/${type === "movie" ? responseDetailsMovie?.poster_path : responseDetailsTv?.poster_path}`}
+                        alt=""
+                        className="rounded-lg w-full"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
                 </div>
+
                 <div className="my-5 font-bold text-5xl">{type === "movie" ? responseDetailsMovie?.title : responseDetailsTv?.name}</div>
 
                 <div className="flex gap-2">
