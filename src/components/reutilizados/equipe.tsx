@@ -9,10 +9,12 @@ import {
 } from "@/components/ui/dialog"
 
 type Props = {
-    listElenco: MediaCastCrew;
+    listElenco: MediaCastCrew | null;
 }
 
 export const Equipe = ({ listElenco }: Props) => {
+
+    if(listElenco)
     return (
         <section>
             <div>

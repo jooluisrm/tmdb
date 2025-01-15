@@ -17,7 +17,7 @@ export const TableFooter = ({ id, type }: Props) => {
 
     const [listRecomendados, setListRecommendados] = useState([]);
     const [listSimilares, setListSimilares] = useState([]);
-    const [listElenco, setListElenco] = useState<MediaCastCrew | any>();
+    const [listElenco, setListElenco] = useState<MediaCastCrew | null>(null);
 
     const [pageIdRecomendados, setPageIdRecomendados] = useState(1);
     const [pageIdSimilares, setPageIdSimilares] = useState(1);
@@ -123,12 +123,19 @@ export const TableFooter = ({ id, type }: Props) => {
                         )
                     }
                 </TabsContent>
-
-
-
                 <TabsContent value="detalhes">
-                    <Elenco listElenco={listElenco} />
-                    <Equipe listElenco={listElenco} />
+                    {listElenco && listElenco.cast && listElenco.crew ? (
+                        listElenco.cast.length === 0 && listElenco.crew.length === 0 ? (
+                            <p className="font-bold pt-5">Sem informação!</p>
+                        ) : (
+                            <>
+                                {listElenco.cast.length > 0 && <Elenco listElenco={listElenco} />}
+                                {listElenco.crew.length > 0 && <Equipe listElenco={listElenco} />}
+                            </>
+                        )
+                    ) : (
+                        <p className="font-bold pt-5">Sem informação!</p>
+                    )}
                 </TabsContent>
             </Tabs>
         </div>

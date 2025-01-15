@@ -11,10 +11,12 @@ import Image from "next/image";
 import imgNoCam from "../../../public/img/sem-foto.jpg";
 
 type Props = {
-    listElenco: MediaCastCrew;
+    listElenco: MediaCastCrew | null | undefined;
 };
 
 export const Elenco = ({ listElenco }: Props) => {
+
+    if(listElenco)
     return (
         <section>
             <div className="text-xl font-bold py-5">Elenco:</div>
