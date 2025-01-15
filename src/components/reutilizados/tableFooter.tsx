@@ -3,10 +3,11 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Section } from "./section";
 import { useEffect, useState } from "react";
-import { creditsFilmes, creditsSerie, recommendationsFilmes, recommendationsSerie, similarFilmes, similarSerie } from "@/services/axiosConfig";
+import { creditsFilmes, creditsSerie, detailsFilmes, detailsSeries, recommendationsFilmes, recommendationsSerie, similarFilmes, similarSerie } from "@/services/axiosConfig";
 import { Elenco } from "./elenco";
-import { MediaCastCrew } from "@/types/movieType";
+import { MediaCastCrew, MovieDetails } from "@/types/movieType";
 import { Equipe } from "./equipe";
+import { TvShowResponse } from "@/types/tvType";
 
 type Props = {
     id: number;
@@ -21,10 +22,20 @@ export const TableFooter = ({ id, type }: Props) => {
 
     const [pageIdRecomendados, setPageIdRecomendados] = useState(1);
     const [pageIdSimilares, setPageIdSimilares] = useState(1);
-    const [pageIdElenco, setPageIdElenco] = useState(1)
+    const [pageIdElenco, setPageIdElenco] = useState(1);
+
+    const [responseDetailsMovie, setResponseDetailsMovie] = useState<MovieDetails | null>(null);
+
 
     if (type === "movie") {
         useEffect(() => {
+            const carregarDetailsMovie = async () => {
+                const details: MovieDetails = await detailsFilmes(id);
+                if (details) {
+                    //console.log(details.genres[0].name);
+                    setResponseDetailsMovie(details);
+                }
+            }
             const carregarFilmesRecomendados = async () => {
                 const movie = await recommendationsFilmes(id, pageIdRecomendados);
                 if (movie) {
@@ -43,14 +54,25 @@ export const TableFooter = ({ id, type }: Props) => {
                     setListElenco(elenco);
                 }
             }
+
+            carregarDetailsMovie();
             carregarFilmesRecomendados();
             carregarFilmesSimilares();
             carregarElenco();
         }, [pageIdRecomendados, pageIdSimilares]);
     }
 
+    const [responseDetailsTv, setResponseDetailsTv] = useState<TvShowResponse | null>(null);
+
     if (type === "tv") {
         useEffect(() => {
+            const carregarDetailsTv = async () => {
+                const details: TvShowResponse = await detailsSeries(id);
+                if (details) {
+                    //console.log(details.genres[0].name);
+                    setResponseDetailsTv(details);
+                }
+            }
             const carregarSeriesRecomendados = async () => {
                 const tv = await recommendationsSerie(id, pageIdRecomendados);
                 if (tv) {
@@ -69,6 +91,7 @@ export const TableFooter = ({ id, type }: Props) => {
                     setListElenco(elenco);
                 }
             }
+            carregarDetailsTv();
             carregarSeriesRecomendados();
             carregarSeriesSimilares();
             carregarElencoSerie();
@@ -124,9 +147,42 @@ export const TableFooter = ({ id, type }: Props) => {
                     }
                 </TabsContent>
                 <TabsContent value="detalhes">
+                    <div>
+                        <h1 className="text-lg font-bold py-1">Título Original:</h1>
+                        <p>{type === "movie" ? responseDetailsMovie?.original_title : responseDetailsTv?.original_name}</p>
+                    </div>
+                    <div>
+                        <h1 className="text-lg font-bold py-1">Estado Atual:</h1>
+                        <p>{type === "movie" ? responseDetailsMovie?.status : responseDetailsTv?.status}</p>
+                    </div>
+                    <div>
+                        <h1 className="text-lg font-bold py-1">{type === "movie" ? "Produtora" : "Emissora"}:</h1>
+                        <div className="flex gap-1">
+                            {
+                                type === "movie" ?
+                                    responseDetailsMovie?.production_companies.map((itemCompanie) => (
+                                        <div className="flex justify-center items-center rounded-lg bg-white w-20">
+                                            <img key={itemCompanie.id} src={`https://image.tmdb.org/t/p/original${itemCompanie.logo_path}`} alt={itemCompanie.name} className="p-2" />
+                                        </div>
+
+                                    ))
+                                    :
+                                    responseDetailsTv?.networks.map((itemNetwork) => (
+                                        <div className="flex justify-center items-center rounded-lg bg-white w-20">
+                                            <img key={itemNetwork.id} src={`https://image.tmdb.org/t/p/original${itemNetwork.logo_path}`} alt={itemNetwork.name} className="p-2" />
+                                        </div>
+
+                                    ))
+                            }
+                        </div>
+                    </div>
+                    <div>
+                        <h1 className="text-lg font-bold py-1">Idioma Original:</h1>
+                        <p>{type === "movie" ? responseDetailsMovie?.original_language : responseDetailsTv?.original_language}</p>
+                    </div>
                     {listElenco && listElenco.cast && listElenco.crew ? (
                         listElenco.cast.length === 0 && listElenco.crew.length === 0 ? (
-                            <p className="font-bold pt-5">Sem informação!</p>
+                            <p className="font-bold pt-5">Sem informação do elenco!</p>
                         ) : (
                             <>
                                 {listElenco.cast.length > 0 && <Elenco listElenco={listElenco} />}
@@ -134,7 +190,7 @@ export const TableFooter = ({ id, type }: Props) => {
                             </>
                         )
                     ) : (
-                        <p className="font-bold pt-5">Sem informação!</p>
+                        <p className="font-bold pt-5">Sem informação dos produtores!</p>
                     )}
                 </TabsContent>
             </Tabs>

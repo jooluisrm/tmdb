@@ -135,7 +135,7 @@ export const BannerInicial = ({ idItem, type }: Props) => {
                 </div>
                 {
                     !responseDetailsMovie?.overview && !responseDetailsTv?.overview ? "Sem descrição..." :
-                        <div className="w-[800px] text-lg text-gray-400 shadow-lg overflow-y-scroll scrollbar-track-transparent h-32 2xl:w-[1000px]">
+                        <div className="w-[800px] text-lg text-gray-400 shadow-lg overflow-y-scroll scrollbar-track-transparent max-h-32 2xl:w-[1000px]">
                             {type === "movie" ? responseDetailsMovie?.overview : responseDetailsTv?.overview}
                         </div>
                 }

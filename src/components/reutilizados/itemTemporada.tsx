@@ -22,9 +22,4 @@ export const ItemTemporada = ({ item, details }: Props) => {
                 </div>
             </div>
         );
-
-
-
-
-
 }
