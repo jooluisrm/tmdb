@@ -74,12 +74,13 @@ export const TableFooter = ({ id, type }: Props) => {
             carregarElencoSerie();
         }, [pageIdRecomendados, pageIdSimilares]);
     }
-    
+
 
     return (
         <div className="container mx-auto pb-10">
             <Tabs defaultValue="recomendados" className="w-full">
                 <TabsList className="bg-transparent">
+
                     <TabsTrigger
                         value="recomendados"
                         className="text-xl font-bold bg-transparent aria-selected:bg-transparent"
@@ -93,10 +94,38 @@ export const TableFooter = ({ id, type }: Props) => {
                         Detalhes
                     </TabsTrigger>
                 </TabsList>
+
                 <TabsContent value="recomendados">
-                    <Section list={listSimilares} title="Similares" pageList={pageIdSimilares} setPageList={setPageIdSimilares} type={type} />
-                    <Section list={listRecomendados} title="Recomendados" pageList={pageIdRecomendados} setPageList={setPageIdRecomendados} type={type} />
+                    {
+                        listSimilares.length === 0 && listRecomendados.length === 0 ? (
+                            <p className="font-bold pt-5">Sem recomendações!</p>
+                        ) : (
+                            <>
+                                {listSimilares.length > 0 && (
+                                    <Section
+                                        list={listSimilares}
+                                        title="Similares"
+                                        pageList={pageIdSimilares}
+                                        setPageList={setPageIdSimilares}
+                                        type={type}
+                                    />
+                                )}
+                                {listRecomendados.length > 0 && (
+                                    <Section
+                                        list={listRecomendados}
+                                        title="Recomendados"
+                                        pageList={pageIdRecomendados}
+                                        setPageList={setPageIdRecomendados}
+                                        type={type}
+                                    />
+                                )}
+                            </>
+                        )
+                    }
                 </TabsContent>
+
+
+
                 <TabsContent value="detalhes">
                     <Elenco listElenco={listElenco} />
                     <Equipe listElenco={listElenco} />

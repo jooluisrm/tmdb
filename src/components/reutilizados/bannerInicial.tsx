@@ -113,7 +113,7 @@ export const BannerInicial = ({ idItem, type }: Props) => {
                             <MostrarTrailer trailer={responseTrailerTv} detailsSeries={responseDetailsTv} />
                     }
                     {
-                        type === "tv" &&  <Temporadas details={responseDetailsTv}/>
+                        type === "tv" && <Temporadas details={responseDetailsTv} />
                     }
                 </div>
 
@@ -127,10 +127,12 @@ export const BannerInicial = ({ idItem, type }: Props) => {
                             ))
                     }
                 </div>
-                <div className="w-[800px] text-lg text-gray-400 shadow-lg overflow-y-scroll scrollbar-track-transparent h-32 2xl:w-[1000px]">
-                    {type === "movie" ? responseDetailsMovie?.overview : responseDetailsTv?.overview}
-                </div>
-
+                {
+                    !responseDetailsMovie?.overview && !responseDetailsTv?.overview ? "Sem descrição..." :
+                        <div className="w-[800px] text-lg text-gray-400 shadow-lg overflow-y-scroll scrollbar-track-transparent h-32 2xl:w-[1000px]">
+                            {type === "movie" ? responseDetailsMovie?.overview : responseDetailsTv?.overview}
+                        </div>
+                }
             </div>
         </div>
     );
