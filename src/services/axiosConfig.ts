@@ -63,7 +63,7 @@ export const movieOrTv = async (pageId: number, params: Categoria) => {
     const { type, category } = params;
     try {
         const response = await api.get(`/${type}/${category}?language=pt-BR&page=${pageId}`);
-        console.log(response.data.results, type);
+        //console.log(response.data.results, type);
         return {
             results: response.data.results,
             type
@@ -166,7 +166,7 @@ export const videoFilme = async (id: number) => {
 export const bannerSeries = async (id: number) => {
     try {
         const response = await api.get(`https://api.themoviedb.org/3/tv/${id}/images`);
-        return response.data.backdrops[0].file_path;
+        return response.data.backdrops;
 
     } catch (error) {
         console.log("Error ao buscar banner:", error);
@@ -242,6 +242,16 @@ export const seasonDetails = async (id: number, numTemp: number) => {
         return response.data;
     } catch (error) {
         console.log("Error ao buscar details temporada:", error);
+    }
+}
+
+export const seasonImagen = async (id: number, numTemp: number) => {
+    try {
+        const response = await api.get(`tv/${id}/season/${numTemp}/images`);
+        //console.log(response.data.posters);
+        return response.data.posters;
+    } catch (error) {
+        console.log("Error ao buscar img temporada:", error);
     }
 }
 

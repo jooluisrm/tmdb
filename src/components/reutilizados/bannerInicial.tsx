@@ -1,20 +1,20 @@
 "use client"
 
-import { bannerFilme, bannerSeries, detailsFilmes, detailsSeries, videoFilme, videoSerie } from "@/services/axiosConfig";
+import { bannerFilme, bannerSeries, detailsFilmes, detailsSeries, seasonDetails, seasonImagen, videoFilme, videoSerie } from "@/services/axiosConfig";
 import { useEffect, useState } from "react";
 import { MovieDetails } from "@/types/movieType";
-import { PlayIcon } from "lucide-react";
 import { MostrarTrailer } from "./mostrarTrailer";
 import { TvShowResponse } from "@/types/tvType";
-import { ButtonBannerInicial } from "./buttonBannerInicial";
 import { Temporadas } from "./temporadas";
+import { DetailsSeason } from "@/types/seasonType";
 
 type Props = {
     idItem: number;
-    type: "movie" | "tv";
+    type: "movie" | "tv" | "season";
+    numTemp?: number;
 }
 
-export const BannerInicial = ({ idItem, type }: Props) => {
+export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
 
     const [linkBanner, setLinkBanner] = useState("");
 
@@ -62,7 +62,7 @@ export const BannerInicial = ({ idItem, type }: Props) => {
                 const banner = await bannerSeries(idItem);
                 //console.log(banner);
                 if (banner) {
-                    setLinkBanner(banner);
+                    setLinkBanner(banner[0].file_path);
                 }
             }
             const carregarDetailsTv = async () => {
@@ -86,6 +86,43 @@ export const BannerInicial = ({ idItem, type }: Props) => {
         }, [idItem]);
     }
 
+    const [responseImg, setResponseImg] = useState(null);
+    const [responseDetailsSeason, setResponseDetailsSeason] = useState<DetailsSeason | null>(null);
+
+    if (type === "season" && numTemp) {
+        useEffect(() => {
+            const carregarBannerTv = async () => {
+                const banner = await bannerSeries(idItem);
+                //console.log(banner);
+                if (banner) {
+                    const n = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+                    const randomIndex = Math.floor(Math.random() * n.length); // Gera um índice aleatório
+                    setLinkBanner(banner[n[randomIndex]].file_path); // Usa o índice para acessar o elemento
+                }
+
+            }
+            const carregarDetailsSeason = async () => {
+                const details = await seasonDetails(idItem, numTemp);
+                if (details) {
+                    setResponseDetailsSeason(details);
+                }
+            }
+            const carregarImg = async () => {
+                const imgSeason = await seasonImagen(idItem, numTemp);
+                console.log(imgSeason);
+                if (imgSeason) {
+                    const n = [1, 2, 3, 4, 5];
+                    const randomIndex = Math.floor(Math.random() * n.length); // Gera um índice aleatório
+                    setResponseImg(imgSeason[n[randomIndex]].file_path);
+                }
+            }
+
+            carregarDetailsSeason();
+            carregarBannerTv();
+            carregarImg();
+        }, []);
+    }
+
 
     return (
         <div style={{
@@ -97,18 +134,33 @@ export const BannerInicial = ({ idItem, type }: Props) => {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
-        }} className="h-screen w-full flex items-end">
+        }} className={`h-screen w-full flex items-end`}>
             <div className="container mx-auto py-10">
                 <div className="relative w-40 2xl:w-56">
                     <img
-                        src={`https://image.tmdb.org/t/p/original/${type === "movie" ? responseDetailsMovie?.poster_path : responseDetailsTv?.poster_path}`}
+                        src={`https://image.tmdb.org/t/p/original/${type === "movie" && responseDetailsMovie?.poster_path
+                            ? responseDetailsMovie.poster_path
+                            : type === "tv" && responseDetailsTv?.poster_path
+                                ? responseDetailsTv.poster_path
+                                : type === "season" && responseImg
+                                    ? responseImg
+                                    : ""
+                            }`}
                         alt=""
                         className="rounded-lg w-full"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+                    {
+                        type != "season" &&
+                        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
+                    }
+
                 </div>
 
-                <div className="my-5 font-bold text-5xl">{type === "movie" ? responseDetailsMovie?.title : responseDetailsTv?.name}</div>
+                <div className="my-5 font-bold text-5xl">
+                    {type === "movie" && responseDetailsMovie?.title}
+                    {type === "tv" && responseDetailsTv?.name}
+                    {type === "season" && responseDetailsSeason?.name}
+                </div>
 
                 <div className="flex gap-2">
                     {
@@ -125,18 +177,22 @@ export const BannerInicial = ({ idItem, type }: Props) => {
 
                 <div className="flex gap-3 py-2">
                     {
-                        type === "movie" ? responseDetailsMovie?.genres.map((item) => (
+                        type === "movie" && responseDetailsMovie?.genres.map((item) => (
                             <p className="font-bold">{item.name}</p>
-                        )) :
-                            responseDetailsTv?.genres.map((item) => (
-                                <p className="font-bold">{item.name}</p>
-                            ))
+                        ))
+                    }
+                    {
+                        type === "tv" && responseDetailsTv?.genres.map((item) => (
+                            <p className="font-bold">{item.name}</p>
+                        ))
                     }
                 </div>
                 {
-                    !responseDetailsMovie?.overview && !responseDetailsTv?.overview ? "Sem descrição..." :
+                    !responseDetailsMovie?.overview && !responseDetailsTv?.overview && !responseDetailsSeason?.overview ? "Sem descrição..." :
                         <div className="w-[800px] text-lg text-gray-400 shadow-lg overflow-y-scroll scrollbar-track-transparent max-h-32 2xl:w-[1000px]">
-                            {type === "movie" ? responseDetailsMovie?.overview : responseDetailsTv?.overview}
+                            {type === "movie" && responseDetailsMovie?.overview}
+                            {type === "tv" && responseDetailsTv?.overview}
+                            {type === "season" && responseDetailsSeason?.overview}
                         </div>
                 }
             </div>
