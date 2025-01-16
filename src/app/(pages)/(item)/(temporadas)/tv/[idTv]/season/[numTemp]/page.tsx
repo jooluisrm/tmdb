@@ -13,7 +13,7 @@ const SeasonSelect = ({ params }: Props) => {
     const { idTv, numTemp } = params;
 
     return (
-        <div className="bg-black min-h-screen text-white">
+        <div className="min-h-screen">
             <BannerInicial idItem={idTv} type="season" numTemp={numTemp}/>
             <SeasonMain params={params}/>
         </div>

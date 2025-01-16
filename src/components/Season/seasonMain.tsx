@@ -3,6 +3,7 @@
 import { seasonDetails } from "@/services/axiosConfig";
 import { DetailsSeason } from "@/types/seasonType";
 import { useEffect, useState } from "react";
+import { ItemEpisodio } from "../reutilizados/itemEpisodio";
 
 type Props = {
     params: {
@@ -30,15 +31,13 @@ export const SeasonMain = ({ params }: Props) => {
 
 
     return (
-        <main className="container mx-auto">
-            <section>
-                <h1 className="text-xl font-bold pb-3">Episódios:</h1>
-                <div>
+        <main className="bg-gradient-to-b from-black via-transparent to-transparent pb-10">
+            <section className="container mx-auto ">
+                <h1 className="text-xl font-bold pb-5">Episódios:</h1>
+                <div className="flex flex-col gap-3">
                     {
-                        responseDetailsSeason?.episodes.map((itemEpisodio) => (
-                            <div>
-                                {itemEpisodio.name}
-                            </div>
+                        responseDetailsSeason?.episodes.map((item) => (
+                            <ItemEpisodio item={item}/>
                         ))
                     }
                 </div>
