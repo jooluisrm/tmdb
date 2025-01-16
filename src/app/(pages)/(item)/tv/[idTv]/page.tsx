@@ -5,13 +5,13 @@ import { Metadata } from "next";
 
 type Props = {
     params: {
-        id: number
+        idTv: number
     }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // Carrega os detalhes do filme com base no ID
-    const tv = await detailsSeries(params.id);
+    const tv = await detailsSeries(params.idTv);
 
     return {
         title: tv?.name || "Detalhes da Serie",
@@ -22,8 +22,8 @@ const SerieSelect = ({ params }: Props) => {
 
     return (
         <div className="bg-black min-h-screen text-white">
-            <BannerInicial idItem={params.id} type="tv"/>
-            <TableFooter id={params.id} type="tv"/>
+            <BannerInicial idItem={params.idTv} type="tv"/>
+            <TableFooter id={params.idTv} type="tv"/>
         </div>
     );
 }
