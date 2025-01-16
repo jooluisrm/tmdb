@@ -186,6 +186,16 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
                             <p className="font-bold">{item.name}</p>
                         ))
                     }
+                    {
+                        type === "season" && 
+                        <div className="text-lg text-gray-300 flex gap-2">
+                            <p>Episódios: <span className="font-extrabold">{responseDetailsSeason?.episodes.length}</span></p>
+                            |
+                            <p>Data de exíbição: <span className="font-extrabold">{responseDetailsSeason?.air_date}</span></p>
+                            |
+                            <p>Avaliação: <span className="font-bold">{responseDetailsSeason?.vote_average}</span></p>
+                        </div>
+                    }
                 </div>
                 {
                     !responseDetailsMovie?.overview && !responseDetailsTv?.overview && !responseDetailsSeason?.overview ? "Sem descrição..." :
