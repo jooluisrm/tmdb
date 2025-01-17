@@ -53,7 +53,7 @@ export const Main = () => {
 
     }, []);
     return (
-        <main className="mt-5 " >
+        <main className="bg-gradient-to-b from-black via-transparent to-transparent" >
             <section className="pb-10">
                 <Section title="Filmes & Séries em Alta" list={allAlta} />
                 <Section title="Filmes em Alta" list={filmesAlta} />

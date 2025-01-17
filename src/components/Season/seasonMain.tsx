@@ -37,7 +37,7 @@ export const SeasonMain = ({ params }: Props) => {
                 <div className="flex flex-col gap-3">
                     {
                         responseDetailsSeason?.episodes.map((item) => (
-                            <ItemEpisodio item={item}/>
+                            <ItemEpisodio key={item.id} item={item}/>
                         ))
                     }
                 </div>

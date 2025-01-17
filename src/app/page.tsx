@@ -3,7 +3,7 @@ import { Welcome } from "@/components/reutilizados/welcome";
 
 const Page = () => {
     return (
-        <div className="bg-black min-h-screen text-white">
+        <div className="min-h-screen">
             <Welcome type="inicio"/>
             <Main />
         </div>

@@ -7,6 +7,7 @@ import { MostrarTrailer } from "./mostrarTrailer";
 import { TvShowResponse } from "@/types/tvType";
 import { Temporadas } from "./temporadas";
 import { DetailsSeason } from "@/types/seasonType";
+import imgSemFoto from "../../../public/img/sem-foto.jpg";
 
 type Props = {
     idItem: number;
@@ -92,15 +93,16 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
     if (type === "season" && numTemp) {
         useEffect(() => {
             const carregarBannerTv = async () => {
-                const banner = await bannerSeries(idItem);
-                //console.log(banner);
-                if (banner) {
-                    const n = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-                    const randomIndex = Math.floor(Math.random() * n.length); // Gera um índice aleatório
-                    setLinkBanner(banner[n[randomIndex]].file_path); // Usa o índice para acessar o elemento
+                const banner = await bannerSeries(idItem); // Chama a função para buscar banners
+                if (banner && banner.length > 0) { // Verifica se existem banners disponíveis
+                    const randomIndex = Math.floor(Math.random() * banner.length); // Gera um índice aleatório
+                    setLinkBanner(banner[randomIndex].file_path); // Usa o índice para acessar o elemento
+                } else {
+                    console.log("Nenhum banner encontrado.");
+                    return null;
                 }
-
-            }
+            };
+            
             const carregarDetailsSeason = async () => {
                 const details = await seasonDetails(idItem, numTemp);
                 if (details) {
@@ -110,10 +112,12 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
             const carregarImg = async () => {
                 const imgSeason = await seasonImagen(idItem, numTemp);
                 console.log(imgSeason);
-                if (imgSeason) {
+                if (imgSeason && imgSeason.length > 0) {
                     const n = [1, 2, 3, 4, 5];
                     const randomIndex = Math.floor(Math.random() * n.length); // Gera um índice aleatório
                     setResponseImg(imgSeason[n[randomIndex]].file_path);
+                } else {
+                    return null;
                 }
             }
 
@@ -137,18 +141,30 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
         }} className={`h-screen w-full flex items-end`}>
             <div className="container mx-auto py-10">
                 <div className="relative w-40 2xl:w-56">
-                    <img
-                        src={`https://image.tmdb.org/t/p/original/${type === "movie" && responseDetailsMovie?.poster_path
-                            ? responseDetailsMovie.poster_path
-                            : type === "tv" && responseDetailsTv?.poster_path
-                                ? responseDetailsTv.poster_path
-                                : type === "season" && responseImg
-                                    ? responseImg
-                                    : ""
-                            }`}
-                        alt=""
-                        className="rounded-lg w-full"
-                    />
+                    {
+                        type === "movie" &&
+                        <img
+                            src={responseDetailsMovie?.backdrop_path ? `https://image.tmdb.org/t/p/original/${responseDetailsMovie?.poster_path}` : imgSemFoto.src}
+                            alt=""
+                            className="rounded-lg w-full"
+                        />
+                    }
+                    {
+                        type === "tv" &&
+                        <img
+                            src={responseDetailsTv?.backdrop_path ? `https://image.tmdb.org/t/p/original/${responseDetailsTv?.poster_path}` : imgSemFoto.src}
+                            alt=""
+                            className="rounded-lg w-full"
+                        />
+                    }
+                    {
+                        type === "season" &&
+                        <img
+                            src={responseDetailsSeason?.poster_path ? `https://image.tmdb.org/t/p/original/${responseDetailsSeason?.poster_path}` : imgSemFoto.src}
+                            alt=""
+                            className="rounded-lg w-full"
+                        />
+                    }
                     {
                         type != "season" &&
                         <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
@@ -157,6 +173,7 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
                 </div>
 
                 <div className="my-5 font-bold text-5xl">
+                    {responseDetailsMovie?.title && responseDetailsSeason?.name && responseDetailsTv?.name && "Sem Título"}
                     {type === "movie" && responseDetailsMovie?.title}
                     {type === "tv" && responseDetailsTv?.name}
                     {type === "season" && responseDetailsSeason?.name}
@@ -187,11 +204,11 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
                         ))
                     }
                     {
-                        type === "season" && 
+                        type === "season" &&
                         <div className="text-lg text-gray-300 flex gap-2">
                             <p>Episódios: <span className="font-extrabold">{responseDetailsSeason?.episodes.length}</span></p>
                             |
-                            <p>Data de exíbição: <span className="font-extrabold">{responseDetailsSeason?.air_date}</span></p>
+                            <p>Data de exíbição: <span className="font-extrabold">{responseDetailsSeason?.air_date ? responseDetailsSeason.air_date : "Sem Data"}</span></p>
                             |
                             <p>Avaliação: <span className="font-bold">{responseDetailsSeason?.vote_average}</span></p>
                         </div>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 const Filmes = () => {
     return (
-        <div className="bg-black min-h-screen text-white">
+        <div className="min-h-screen">
             <Welcome type="filmes"/>
             <MainMovie />
         </div>

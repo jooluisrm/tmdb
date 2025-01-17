@@ -55,7 +55,7 @@ export const Welcome = ({ type }: Props) => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
             }}
-            className="h-[400px] transition-all"
+            className="h-[450px] transition-all"
         >
             <div className="bg-black h-full bg-opacity-0">
                 <div className="h-full flex flex-col justify-center">
