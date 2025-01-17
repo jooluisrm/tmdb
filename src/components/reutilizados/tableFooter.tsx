@@ -101,7 +101,7 @@ export const TableFooter = ({ id, type }: Props) => {
 
 
     return (
-        <div className="pb-10 bg-gradient-to-b from-black via-transparent to-transparent">
+        <div className="bg-gradient-to-b from-black via-transparent to-transparent dark:bg-transparent bg-gray-900 pb-10">
             <Tabs defaultValue="recomendados" className="w-full container mx-auto">
                 <TabsList className="bg-transparent">
 

@@ -4,6 +4,7 @@ import { Movie } from "@/types/movieType";
 import { useEffect, useState } from "react";
 import { Item } from "../reutilizados/item";
 import { Section } from "../reutilizados/section";
+import { ThemeToggle } from "../reutilizados/ThemeToggle";
 
 export const MainMovie = () => {
 
@@ -62,8 +63,9 @@ export const MainMovie = () => {
     }, [pageNews, pagePopular, pageClasificados, pageEmBreve]);
 
     return (
-        <main className="bg-gradient-to-b from-black via-transparent to-transparent">
+        <main className="bg-gradient-to-b from-black via-transparent to-transparent dark:bg-transparent bg-gray-900">
             <section className="pb-10">
+                <ThemeToggle />
                 <Section title="Estreias Recentes" list={filmesNovos} type={"movie"} pageList={pageNews} setPageList={setPageNews} />
                 <Section title="Em Alta" list={filmesAlta} type={"movie"}/>
                 <Section title="Populares" list={filmesPolular} type={"movie"} pageList={pagePopular} setPageList={setPagePopular} />

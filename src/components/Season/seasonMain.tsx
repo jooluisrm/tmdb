@@ -31,7 +31,7 @@ export const SeasonMain = ({ params }: Props) => {
 
 
     return (
-        <main className="bg-gradient-to-b from-black via-transparent to-transparent pb-10">
+        <main className="bg-gradient-to-b from-black via-transparent to-transparent dark:bg-transparent bg-gray-900">
             <section className="container mx-auto ">
                 <h1 className="text-xl font-bold pb-5">Episódios:</h1>
                 <div className="flex flex-col gap-3">

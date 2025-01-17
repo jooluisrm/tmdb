@@ -25,7 +25,7 @@ export const MostrarTrailer = ({ trailer, detailsFilmes, detailsSeries }: Props)
                 <DialogTrigger>
                     <ButtonBannerInicial text="Ver Vídeo" temp={false}/>
                 </DialogTrigger>
-                <DialogContent className="min-w-[800px] h-[500px]">
+                <DialogContent className="min-w-[800px] h-[500px] bg-gray-900 dark:bg-black">
                     <DialogHeader>
                         <DialogTitle className="text-2xl">{trailer?.type != null && `${trailer.type}:`} <span className="font-extrabold">{detailsFilmes?.title ? detailsFilmes.title : trailer?.name != null ? trailer.name : detailsSeries?.name}</span></DialogTitle>
                         <DialogDescription className="flex justify-center items-center py-2">

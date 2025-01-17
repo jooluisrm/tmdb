@@ -18,7 +18,7 @@ const VideoYoutube = ({ trailer }: Props) => {
     };
 
     return (
-        <div className="border-2 border-white rounded-lg overflow-hidden max-w-full">
+        <div className="border-2 border-white rounded-lg overflow-hidden max-w-full bg-gray-900 dark:bg-black">
             <YouTube videoId={trailer?.key} opts={opts} />
         </div>
     );
