@@ -111,11 +111,9 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
             }
             const carregarImg = async () => {
                 const imgSeason = await seasonImagen(idItem, numTemp);
-                console.log(imgSeason);
                 if (imgSeason && imgSeason.length > 0) {
-                    const n = [1, 2, 3, 4, 5];
-                    const randomIndex = Math.floor(Math.random() * n.length); // Gera um índice aleatório
-                    setResponseImg(imgSeason[n[randomIndex]].file_path);
+                    const randomIndex = Math.floor(Math.random() * imgSeason.length); // Gera um índice aleatório
+                    setResponseImg(imgSeason[randomIndex].file_path);
                 } else {
                     return null;
                 }
@@ -165,11 +163,6 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
                             className="rounded-lg w-full"
                         />
                     }
-                    {
-                        type != "season" &&
-                        <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent"></div>
-                    }
-
                 </div>
 
                 <div className="my-5 font-bold text-5xl">

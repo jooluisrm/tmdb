@@ -1,6 +1,7 @@
 import { funcaoData } from "@/services/funcaoData";
 import { MediaItem } from "@/types/movieType";
 import Link from "next/link";
+import imgSemFoto from "../../../public/img/sem-foto.jpg";
 
 type Props = {
     data: MediaItem[];
@@ -16,10 +17,13 @@ export const Item2 = ({ data }: Props) => {
                         {
                             item.media_type === "movie" &&
                             <div>
-                                <img src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`} alt={item.original_title} className="hover:rounded-t-lg transition-all" />
+                                <img
+                                    src={item.backdrop_path ? `https://image.tmdb.org/t/p/original/${item.backdrop_path}` : imgSemFoto.src}
+                                    alt={item.original_title}
+                                    className="hover:rounded-t-lg  transition-all h-44 w-full"
+                                />
                                 <div className="pl-2 pb-2">
                                     <h2 className="font-bold pt-2">{item.title}</h2>
-                                    <p>Filme</p>
                                     <p>{funcaoData(item.release_date)}</p>
                                 </div>
                             </div>
@@ -27,10 +31,13 @@ export const Item2 = ({ data }: Props) => {
                         {
                             item.media_type === "tv" &&
                             <div>
-                                <img src={`https://image.tmdb.org/t/p/original/${item.backdrop_path}`} alt={item.original_name} className="hover:rounded-t-lg transition-all" />
+                                <img
+                                    src={item.backdrop_path ? `https://image.tmdb.org/t/p/original/${item.backdrop_path}` : imgSemFoto.src}
+                                    alt={item.original_name}
+                                    className="hover:rounded-t-lg h-44 transition-all"
+                                />
                                 <div className="pl-2 pb-2">
                                     <h2 className="font-bold pt-2">{item.name}</h2>
-                                    <p>Série</p>
                                     <p>{funcaoData(item.first_air_date)}</p>
                                 </div>
                             </div>
@@ -38,7 +45,11 @@ export const Item2 = ({ data }: Props) => {
                         {
                             item.media_type === "person" &&
                             <div>
-                                <img src={`https://image.tmdb.org/t/p/original/${item.profile_path}`} alt={item.original_name} className="hover:rounded-t-lg transition-all" />
+                                <img 
+                                    src={item.profile_path ? `https://image.tmdb.org/t/p/original/${item.profile_path}` : imgSemFoto.src}
+                                    alt={item.original_name}
+                                    className="hover:rounded-t-lg h-44 w-full transition-all"
+                                />
                                 <div className="pl-2 pb-2">
                                     <h2 className="font-bold pt-2">{item.name}</h2>
                                 </div>
