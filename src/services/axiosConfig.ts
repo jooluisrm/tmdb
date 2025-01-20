@@ -267,5 +267,17 @@ export const videoSeason = async (id: number, numTemp: number) => {
         console.log("Error ao buscar video:", error);
     }
 }
+
+// Carregar Credits Season
+
+export const creditsSeason = async (id: number, numTemp: number) => {
+    try {
+        const response = await api.get(`tv/${id}/season/${numTemp}/credits?language=en-US`);
+        //console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log("Error ao buscar video:", error);
+    }
+}
 export default api;
 

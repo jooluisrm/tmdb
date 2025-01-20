@@ -1,9 +1,12 @@
 "use client"
 
-import { seasonDetails } from "@/services/axiosConfig";
+import { creditsSeason, seasonDetails } from "@/services/axiosConfig";
 import { DetailsSeason } from "@/types/seasonType";
 import { useEffect, useState } from "react";
 import { ItemEpisodio } from "../reutilizados/itemEpisodio";
+import { MediaCastCrew } from "@/types/movieType";
+import { Elenco } from "../reutilizados/elenco";
+import { Equipe } from "../reutilizados/equipe";
 
 type Props = {
     params: {
@@ -15,6 +18,7 @@ type Props = {
 export const SeasonMain = ({ params }: Props) => {
 
     const [responseDetailsSeason, setResponseDetailsSeason] = useState<DetailsSeason | null>(null);
+    const [responseCreditsSeason, setResponseCreditsSeason] = useState<MediaCastCrew | null>(null);
 
     useEffect(() => {
 
@@ -24,7 +28,14 @@ export const SeasonMain = ({ params }: Props) => {
                 setResponseDetailsSeason(details);
             }
         }
+        const carregarCreditsSeason = async () => {
+            const details = await creditsSeason(params.idTv, params.numTemp);
+            if (details) {
+                setResponseCreditsSeason(details);
+            }
+        }
 
+        carregarCreditsSeason();
         carregarDetailsSeason();
 
     }, []);
@@ -40,6 +51,10 @@ export const SeasonMain = ({ params }: Props) => {
                             <ItemEpisodio key={item.id} item={item}/>
                         ))
                     }
+                </div>
+                <div>
+                    <Elenco listElenco={responseCreditsSeason}/>
+                    <Equipe listElenco={responseCreditsSeason}/>
                 </div>
             </section>
         </main>

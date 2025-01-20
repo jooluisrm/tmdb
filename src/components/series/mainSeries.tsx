@@ -59,7 +59,7 @@ export const MainSeries = () => {
     }, [pageNews, pagePopular, pageClasificados, pageEmBreve]);
     return (
         <main>
-            <section className="bg-gradient-to-b from-black via-transparent to-transparent dark:bg-transparent bg-gray-900">
+            <section className="bg-gradient-to-b from-black via-transparent to-transparent">
                 <Section title="Novidades do Dia" list={seriesNovos} type="tv" pageList={pageNews} setPageList={setPageNews} />
                 <Section title="Séries em Alta" list={seriesAlta} type="tv" pageList={pageAlta} setPageList={setPageAlta} />
                 <Section title="As Mais Populares" list={seriesPolular} type="tv" pageList={pagePopular} setPageList={setPagePopular} />
