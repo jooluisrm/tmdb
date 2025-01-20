@@ -245,6 +245,7 @@ export const seasonDetails = async (id: number, numTemp: number) => {
     }
 }
 
+// Carregar IMG season
 export const seasonImagen = async (id: number, numTemp: number) => {
     try {
         const response = await api.get(`tv/${id}/season/${numTemp}/images`);
@@ -255,5 +256,16 @@ export const seasonImagen = async (id: number, numTemp: number) => {
     }
 }
 
+// Carregar Trailer Season
+
+export const videoSeason = async (id: number, numTemp: number) => {
+    try {
+        const response = await api.get(`tv/${id}/season/${numTemp}/videos?language=en-US`);
+        //console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.log("Error ao buscar video:", error);
+    }
+}
 export default api;
 

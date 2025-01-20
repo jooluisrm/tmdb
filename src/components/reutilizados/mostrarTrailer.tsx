@@ -11,21 +11,23 @@ import VideoYoutube from "./videoYoutube";
 import { MovieDetails, ResultItem } from "@/types/movieType";
 import { TvShowResponse } from "@/types/tvType";
 import { ButtonBannerInicial } from "./buttonBannerInicial";
+import { DetailsSeason } from "@/types/seasonType";
 
 type Props = {
     trailer: ResultItem | null;
     detailsFilmes?: MovieDetails | null;
     detailsSeries?: TvShowResponse | null;
+    detailsSeason?: DetailsSeason | null;
 }
 
-export const MostrarTrailer = ({ trailer, detailsFilmes, detailsSeries }: Props) => {
+export const MostrarTrailer = ({ trailer, detailsFilmes, detailsSeries, detailsSeason }: Props) => {
     return (
         <>
             <Dialog>
                 <DialogTrigger>
                     <ButtonBannerInicial text="Ver Vídeo" temp={false}/>
                 </DialogTrigger>
-                <DialogContent className="min-w-[800px] h-[500px] bg-gray-900 dark:bg-black">
+                <DialogContent className="min-w-[800px] h-[500px]">
                     <DialogHeader>
                         <DialogTitle className="text-2xl">{trailer?.type != null && `${trailer.type}:`} <span className="font-extrabold">{detailsFilmes?.title ? detailsFilmes.title : trailer?.name != null ? trailer.name : detailsSeries?.name}</span></DialogTitle>
                         <DialogDescription className="flex justify-center items-center py-2">

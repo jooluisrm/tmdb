@@ -1,6 +1,6 @@
 "use client"
 
-import { bannerFilme, bannerSeries, detailsFilmes, detailsSeries, seasonDetails, seasonImagen, videoFilme, videoSerie } from "@/services/axiosConfig";
+import { bannerFilme, bannerSeries, detailsFilmes, detailsSeries, seasonDetails, seasonImagen, videoFilme, videoSeason, videoSerie } from "@/services/axiosConfig";
 import { useEffect, useState } from "react";
 import { MovieDetails } from "@/types/movieType";
 import { MostrarTrailer } from "./mostrarTrailer";
@@ -8,6 +8,7 @@ import { TvShowResponse } from "@/types/tvType";
 import { Temporadas } from "./temporadas";
 import { DetailsSeason } from "@/types/seasonType";
 import imgSemFoto from "../../../public/img/sem-foto.jpg";
+import { Hand, Star, StarIcon, StarOff } from "lucide-react";
 
 type Props = {
     idItem: number;
@@ -89,6 +90,8 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
 
     const [responseImg, setResponseImg] = useState(null);
     const [responseDetailsSeason, setResponseDetailsSeason] = useState<DetailsSeason | null>(null);
+    const [responseTrailerSeason, setResponseTrailerSeason] = useState(null);
+    const [date, setDate] = useState();
 
     if (type === "season" && numTemp) {
         useEffect(() => {
@@ -102,13 +105,17 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
                     return null;
                 }
             };
-            
+
             const carregarDetailsSeason = async () => {
                 const details = await seasonDetails(idItem, numTemp);
                 if (details) {
                     setResponseDetailsSeason(details);
+                    // Use 'details' diretamente aqui
+                    const [ano, mes, dia] = details.air_date.split("-");
+                    setDate(ano);
                 }
-            }
+            };
+
             const carregarImg = async () => {
                 const imgSeason = await seasonImagen(idItem, numTemp);
                 if (imgSeason && imgSeason.length > 0) {
@@ -119,6 +126,15 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
                 }
             }
 
+            const carregarTrailerSeason = async () => {
+                const trailer = await videoSeason(idItem, numTemp);
+                if (trailer) {
+                    console.log(trailer.results[0]);
+                    setResponseTrailerSeason(trailer.results[0]);
+                }
+            }
+
+            carregarTrailerSeason();
             carregarDetailsSeason();
             carregarBannerTv();
             carregarImg();
@@ -175,10 +191,18 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
                 <div className="flex gap-2">
                     {
                         type === "movie"
-                            ?
-                            <MostrarTrailer trailer={responseTrailerMovie} detailsFilmes={responseDetailsMovie} />
-                            :
-                            <MostrarTrailer trailer={responseTrailerTv} detailsSeries={responseDetailsTv} />
+                        &&
+                        <MostrarTrailer trailer={responseTrailerMovie} detailsFilmes={responseDetailsMovie} />
+                    }
+                    {
+                        type === "tv"
+                        &&
+                        <MostrarTrailer trailer={responseTrailerTv} detailsSeries={responseDetailsTv} />
+                    }
+                    {
+                        type === "season"
+                        &&
+                        <MostrarTrailer trailer={responseTrailerSeason} detailsSeason={responseDetailsSeason}/>
                     }
                     {
                         type === "tv" && <Temporadas details={responseDetailsTv} />
@@ -199,11 +223,11 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
                     {
                         type === "season" &&
                         <div className="text-lg text-gray-300 flex gap-2">
-                            <p>Episódios: <span className="font-extrabold">{responseDetailsSeason?.episodes.length}</span></p>
-                            |
-                            <p>Data de exíbição: <span className="font-extrabold">{responseDetailsSeason?.air_date ? responseDetailsSeason.air_date : "Sem Data"}</span></p>
-                            |
-                            <p>Avaliação: <span className="font-bold">{responseDetailsSeason?.vote_average}</span></p>
+                            <p><span className="font-extrabold">{responseDetailsSeason?.episodes.length}x{responseDetailsSeason?.season_number}</span></p>
+                            ●
+                            <p><span className="font-extrabold">{responseDetailsSeason?.air_date ? date : "Sem Data"}</span></p>
+                            ●
+                            <p><span className="font-bold items-center flex">{responseDetailsSeason?.vote_average ? responseDetailsSeason.vote_average : <StarOff size={25} />}</span></p>
                         </div>
                     }
                 </div>

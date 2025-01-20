@@ -7,7 +7,7 @@ type Props = {
 
 export const ItemEpisodio = ({ item }: Props) => {
     return (
-        <div className="bg-black rounded-xl flex border hover:border-white transition-all duration-300">
+        <div className="bg-black text-gray-400 rounded-xl flex border hover:border-white hover:text-white transition-all duration-300">
             <img
                 src={item?.still_path ? `https://image.tmdb.org/t/p/original/${item.still_path}` : imgSemFoto.src}
                 alt={item?.name}

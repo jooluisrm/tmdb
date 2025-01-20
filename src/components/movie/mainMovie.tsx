@@ -63,7 +63,7 @@ export const MainMovie = () => {
     }, [pageNews, pagePopular, pageClasificados, pageEmBreve]);
 
     return (
-        <main className="bg-gradient-to-b from-black via-transparent to-transparent dark:bg-transparent bg-gray-900">
+        <main className="bg-gradient-to-b from-black via-transparent to-transparent">
             <section className="pb-10">
                 <ThemeToggle />
                 <Section title="Estreias Recentes" list={filmesNovos} type={"movie"} pageList={pageNews} setPageList={setPageNews} />
