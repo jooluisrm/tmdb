@@ -3,13 +3,14 @@ import YouTube from "react-youtube";
 
 type Props = {
     trailer: ResultItem | null;
+    type: "trailer" | "trailerEp";
 }
 
 
-const VideoYoutube = ({ trailer }: Props) => {
+const VideoYoutube = ({ trailer, type }: Props) => {
     const opts = {
-        height: "390",
-        width: "640",
+        height: type != "trailer" ? "290" : "390",
+        width: type != "trailer" ? "540" : "640",
         playerVars: {
             autoplay: 1, // Reproduz automaticamente ao carregar
             controls: 1, // Mostra os controles do player (1: habilitado, 0: desabilitado)

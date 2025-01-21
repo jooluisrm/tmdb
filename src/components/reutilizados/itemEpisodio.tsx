@@ -10,12 +10,33 @@ import {
 } from "@/components/ui/dialog"
 import Link from "next/link";
 import imgNoCam from "../../../public/img/sem-foto.jpg";
+import { MostrarTrailer } from "./mostrarTrailer";
+import VideoYoutube from "./videoYoutube";
+import { useEffect, useState } from "react";
+import { videoEpisodes } from "@/services/axiosConfig";
+import { ConvidadosEp } from "./convidadosEp";
 
 type Props = {
     item: EpisodesSeason | null;
 }
 
 export const ItemEpisodio = ({ item }: Props) => {
+
+    const [videoEp, setVideoEp] = useState(null);
+
+    useEffect(() => {
+        const pegarTrailer = async () => {
+            if (item?.show_id != null) {
+                const video = await videoEpisodes(item.show_id, item?.season_number, item?.episode_number);
+                if (video) {
+                    setVideoEp(video.results[0]);
+                }
+            }
+        }
+
+        pegarTrailer();
+    }, []);
+
     return (
 
         <Dialog>
@@ -35,15 +56,16 @@ export const ItemEpisodio = ({ item }: Props) => {
                     </div>
                 </div>
             </DialogTrigger>
-            <DialogContent className="min-w-[1000px] min-h-[500px]">
+            <DialogContent className="min-w-[1000px] min-h-[550px]">
                 <DialogHeader>
                     <DialogTitle>{item?.name}</DialogTitle>
                     <DialogDescription className="flex items-center gap-5">
                         <div className="h-96 flex-1">
 
-                            <img src={`https://image.tmdb.org/t/p/original/${item?.still_path}`} alt={item?.name} className="rounded-lg" />
-                            <p className="pt-3 text-white">{item?.overview}</p>
-                            <div className="flex gap-3 w-full justify-center items-end h-20">
+                            <VideoYoutube trailer={videoEp} type={"trailerEp"}/>
+                            {/*<img src={`https://image.tmdb.org/t/p/original/${item?.still_path}`} alt={item?.name} className="rounded-lg" />*/}
+                            <p className="pt-5 px-5 text-white">{item?.overview}</p>
+                            <div className="flex gap-3 w-full justify-center items-end pt-5 text-white">
                                 <p>{item?.runtime && item.runtime} min</p>
                                 ●
                                 <p>{item?.air_date}</p>
@@ -53,58 +75,7 @@ export const ItemEpisodio = ({ item }: Props) => {
 
                         </div>
                         <div className="flex-1">
-                            <div>
-                                <div className="py-3 font-extrabold text-2xl">
-                                    <DialogTitle>Convidados Especiais</DialogTitle>
-                                </div>
-                                <div className="flex flex-col gap-2 overflow-y-scroll h-96 2xl:h-96">
-                                    {item?.guest_stars.map((star) => (
-                                        <>
-                                            <div className="flex justify-between bg-black rounded-lg">
-                                                <div className="py-3 px-5">
-                                                    <h1 className="font-bold text-xl pb-2">{star.name}</h1>
-                                                    <ul className="flex flex-col gap-1">
-                                                        <li>
-                                                            Função:{" "}
-                                                            <span className="font-bold">
-                                                                {star.known_for_department}
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            Personagem:{" "}
-                                                            <span className="font-bold">{star.character}</span>
-                                                        </li>
-                                                        <li>
-                                                            Popularidade:{" "}
-                                                            <span className="font-bold">
-                                                                {star.popularity.toFixed(2)}
-                                                            </span>
-                                                        </li>
-                                                        <li className="font-bold underline">
-                                                            <Link href={`/person/${star.id}`}>Saiba mais</Link>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div
-                                                    style={{
-                                                        backgroundImage: `url(${star.profile_path
-                                                            ? `https://image.tmdb.org/t/p/w500/${star.profile_path}`
-                                                            : imgNoCam.src
-                                                            })`,
-                                                        backgroundSize: "cover",
-                                                        backgroundPosition: "center",
-                                                        backgroundRepeat: "no-repeat",
-                                                        width: "100px",
-                                                        height: "100%",
-                                                        borderRadius: "0 5px 5px 0",
-                                                    }}
-                                                ></div>
-                                            </div>
-                                        </>
-                                    ))}
-                                </div>
-
-                            </div>
+                            <ConvidadosEp item={item}/>
                         </div>
                     </DialogDescription>
                 </DialogHeader>

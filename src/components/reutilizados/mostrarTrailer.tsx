@@ -31,7 +31,7 @@ export const MostrarTrailer = ({ trailer, detailsFilmes, detailsSeries, detailsS
                     <DialogHeader>
                         <DialogTitle className="text-2xl">{trailer?.type != null && `${trailer.type}:`} <span className="font-extrabold">{detailsFilmes?.title ? detailsFilmes.title : trailer?.name != null ? trailer.name : detailsSeries?.name}</span></DialogTitle>
                         <DialogDescription className="flex justify-center items-center py-2">
-                            <VideoYoutube trailer={trailer} />
+                            <VideoYoutube trailer={trailer} type="trailer"/>
                         </DialogDescription>
                     </DialogHeader>
                 </DialogContent>
