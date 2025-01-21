@@ -110,9 +110,11 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
                 const details = await seasonDetails(idItem, numTemp);
                 if (details) {
                     setResponseDetailsSeason(details);
-                    // Use 'details' diretamente aqui
-                    const [ano, mes, dia] = details.air_date.split("-");
-                    setDate(ano);
+                    if (details.air_date != null) {
+                        const [ano, mes, dia] = details.air_date.split("-");
+                        setDate(ano);
+                    }
+
                 }
             };
 
@@ -202,7 +204,7 @@ export const BannerInicial = ({ idItem, type, numTemp }: Props) => {
                     {
                         type === "season"
                         &&
-                        <MostrarTrailer trailer={responseTrailerSeason} detailsSeason={responseDetailsSeason}/>
+                        <MostrarTrailer trailer={responseTrailerSeason} detailsSeason={responseDetailsSeason} />
                     }
                     {
                         type === "tv" && <Temporadas details={responseDetailsTv} />
