@@ -17,7 +17,7 @@ export const ItemTemporada = ({ item, details }: Props) => {
     if (item && details)
         return (
             <>
-                    <div onClick={() => handleSelect()} key={item.id} className="bg-black flex rounded-xl transition-all border border-black duration-200 hover:text-white hover:border-white">
+                    <div onClick={() => handleSelect()} key={item.id} className="bg-black flex rounded-xl transition-all border cursor-pointer border-black duration-200 hover:text-white hover:border-white">
                         <img src={!item.poster_path ? imgSemFoto.src : `https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.name} className="w-40 h-64 rounded-tl-xl rounded-bl-xl" />
                         <div className="py-5 px-5 flex flex-col justify-center">
                             <h1 className="font-extrabold text-xl">{item.name}</h1>
