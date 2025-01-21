@@ -1,6 +1,7 @@
 import { SeasonTv, TvShowResponse } from "@/types/tvType";
 import imgSemFoto from "../../../public/img/sem-foto.jpg";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 
 type Props = {
     item: SeasonTv | null;
@@ -8,12 +9,15 @@ type Props = {
 }
 
 export const ItemTemporada = ({ item, details }: Props) => {
+    const router = useRouter();
+    const handleSelect = () => {
+        router.push(`/tv/${details?.id}/season/${item?.season_number}`);
+    }
 
     if (item && details)
         return (
             <>
-                <Link href={`${details.id}/season/${item.season_number}`}>
-                    <div key={item.id} className="bg-black flex rounded-xl transition-all border border-black duration-200 hover:text-white hover:border-white">
+                    <div onClick={() => handleSelect()} key={item.id} className="bg-black flex rounded-xl transition-all border border-black duration-200 hover:text-white hover:border-white">
                         <img src={!item.poster_path ? imgSemFoto.src : `https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.name} className="w-40 h-64 rounded-tl-xl rounded-bl-xl" />
                         <div className="py-5 px-5 flex flex-col justify-center">
                             <h1 className="font-extrabold text-xl">{item.name}</h1>
@@ -24,7 +28,6 @@ export const ItemTemporada = ({ item, details }: Props) => {
                             </div>
                         </div>
                     </div>
-                </Link>
             </>
         );
 }
