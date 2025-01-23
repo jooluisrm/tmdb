@@ -17,10 +17,10 @@ export const Item = ({ data, typeSection, typeList }: Props) => {
                         typeList === "movie" || item.media_type === "movie"
                             ? `/movie/${item.id}`
                             : typeList === "tv" || item.media_type === "tv"
-                            ? `/tv/${item.id}`
-                            : typeList === "person"
-                            ? `/person/${item.id}`
-                            : `/person/${item.id}`
+                                ? `/tv/${item.id}`
+                                : typeList === "person"
+                                    ? `/person/${item.id}`
+                                    : `/person/${item.id}`
                     }
                     key={item.id}
                 >
