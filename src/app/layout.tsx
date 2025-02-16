@@ -3,6 +3,7 @@ import "./globals.css";
 import { Metadata } from "next";
 import { HeaderMenu } from "@/components/header/headerMenu";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Analytics } from "@vercel/analytics/react"
 
 
 export const metadata: Metadata = {
@@ -31,6 +32,7 @@ const Layout = ({ children }: Props) => {
                         disableTransitionOnChange
                     >
                         {children}
+                        <Analytics/>
                     </ThemeProvider>
                 </div>
             </body>
